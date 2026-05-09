@@ -36,7 +36,7 @@ export default function FilterSheet() {
                 <button
                   key={opt}
                   onClick={() => setSortBy(opt)}
-                  className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${sortBy === opt ? 'bg-[#FD4D38] text-white' : 'bg-gray-100 text-gray-600'}`}
+                  className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${sortBy === opt ? 'bg-[#3b82f6] text-white' : 'bg-gray-100 text-gray-600'}`}
                 >
                   {opt}
                 </button>
@@ -51,7 +51,7 @@ export default function FilterSheet() {
                 <button
                   key={c}
                   onClick={() => setCondition(c)}
-                  className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${condition === c ? 'bg-[#FD4D38] text-white' : 'bg-gray-100 text-gray-600'}`}
+                  className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${condition === c ? 'bg-[#3b82f6] text-white' : 'bg-gray-100 text-gray-600'}`}
                 >
                   {c}
                 </button>
@@ -66,7 +66,7 @@ export default function FilterSheet() {
                 <button
                   key={p}
                   onClick={() => setPriceRange(p)}
-                  className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${priceRange === p ? 'bg-[#FD4D38] text-white' : 'bg-gray-100 text-gray-600'}`}
+                  className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${priceRange === p ? 'bg-[#3b82f6] text-white' : 'bg-gray-100 text-gray-600'}`}
                 >
                   {p}
                 </button>
@@ -78,7 +78,7 @@ export default function FilterSheet() {
         <div className="p-4 border-t border-gray-100 bg-white pb-8">
           <button
             onClick={toggleFilterSheet}
-            className="w-full h-14 bg-[#FD4D38] text-white font-semibold rounded-full active:scale-[0.98] transition-transform shadow-lg shadow-[#FD4D38]/25"
+            className="w-full h-14 bg-[#3b82f6] text-white font-semibold rounded-full active:scale-[0.98] transition-transform shadow-lg shadow-[#3b82f6]/25"
           >
             Apply Filters
           </button>

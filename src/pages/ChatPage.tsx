@@ -40,7 +40,7 @@ export default function ChatPage() {
             <p className="text-xs text-gray-400 font-medium">About this product</p>
             <p className="text-sm font-semibold text-gray-900 line-clamp-1">{conv.productPreview.title}</p>
           </div>
-          <span className="text-sm font-bold text-[#FD4D38]">${conv.productPreview.price}</span>
+          <span className="text-sm font-bold text-[#3b82f6]">${conv.productPreview.price}</span>
         </div>
       )}
 
@@ -50,7 +50,7 @@ export default function ChatPage() {
           const isMe = msg.senderId === 'user';
           return (
             <div key={msg.id} className={`flex ${isMe ? 'justify-end' : 'justify-start'}`}>
-              <div className={`max-w-[75%] px-4 py-2.5 rounded-2xl text-sm ${isMe ? 'bg-[#FD4D38] text-white rounded-br-md' : 'bg-white text-gray-900 rounded-bl-md shadow-sm'}`}>
+              <div className={`max-w-[75%] px-4 py-2.5 rounded-2xl text-sm ${isMe ? 'bg-[#3b82f6] text-white rounded-br-md' : 'bg-white text-gray-900 rounded-bl-md shadow-sm'}`}>
                 {msg.content}
                 <p className={`text-[10px] mt-1 ${isMe ? 'text-white/60' : 'text-gray-400'}`}>{msg.timestamp}</p>
               </div>
@@ -71,12 +71,12 @@ export default function ChatPage() {
             onChange={(e) => setText(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
             placeholder="Type a message..."
-            className="w-full h-11 pl-4 pr-4 bg-gray-100 rounded-full text-sm outline-none focus:ring-2 focus:ring-[#FD4D38]/20"
+            className="w-full h-11 pl-4 pr-4 bg-gray-100 rounded-full text-sm outline-none focus:ring-2 focus:ring-[#3b82f6]/20"
           />
         </div>
         <button
           onClick={handleSend}
-          className="w-10 h-10 rounded-full bg-[#FD4D38] flex items-center justify-center shrink-0 active:scale-90 transition-transform"
+          className="w-10 h-10 rounded-full bg-[#3b82f6] flex items-center justify-center shrink-0 active:scale-90 transition-transform"
         >
           <Send size={16} className="text-white" />
         </button>

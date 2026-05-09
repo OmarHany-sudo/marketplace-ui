@@ -54,7 +54,7 @@ export default function SellFormPage() {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="What are you selling?"
-            className="w-full h-12 px-4 bg-gray-100 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#FD4D38]/20"
+            className="w-full h-12 px-4 bg-gray-100 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#3b82f6]/20"
           />
         </div>
 
@@ -66,7 +66,7 @@ export default function SellFormPage() {
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Describe your item..."
             rows={4}
-            className="w-full px-4 py-3 bg-gray-100 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#FD4D38]/20 resize-none"
+            className="w-full px-4 py-3 bg-gray-100 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#3b82f6]/20 resize-none"
           />
         </div>
 
@@ -96,7 +96,7 @@ export default function SellFormPage() {
               value={price}
               onChange={(e) => setPrice(e.target.value)}
               placeholder="0.00"
-              className="w-full h-12 pl-8 pr-4 bg-gray-100 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#FD4D38]/20"
+              className="w-full h-12 pl-8 pr-4 bg-gray-100 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#3b82f6]/20"
             />
           </div>
         </div>
@@ -112,7 +112,7 @@ export default function SellFormPage() {
         </button>
         <button
           onClick={handleCreate}
-          className="flex-1 h-12 bg-[#FD4D38] text-white font-semibold rounded-full active:scale-[0.98] shadow-lg shadow-[#FD4D38]/25 text-sm"
+          className="flex-1 h-12 bg-[#3b82f6] text-white font-semibold rounded-full active:scale-[0.98] shadow-lg shadow-[#3b82f6]/25 text-sm"
         >
           Create Listing
         </button>

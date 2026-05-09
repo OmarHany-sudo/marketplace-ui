@@ -24,7 +24,7 @@ export default function OrderSuccessPage() {
 
       <button
         onClick={() => navigate('home')}
-        className="w-full h-14 bg-[#FD4D38] text-white font-semibold rounded-full active:scale-[0.98] shadow-lg shadow-[#FD4D38]/25 flex items-center justify-center gap-2"
+        className="w-full h-14 bg-[#3b82f6] text-white font-semibold rounded-full active:scale-[0.98] shadow-lg shadow-[#3b82f6]/25 flex items-center justify-center gap-2"
       >
         <Home size={18} />
         Back to Home

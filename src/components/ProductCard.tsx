@@ -20,7 +20,7 @@ export default function ProductCard({ product, variant = 'grid' }: Props) {
         <div className="w-24 h-24 rounded-xl overflow-hidden bg-gray-100 shrink-0 relative">
           <img src={product.image} alt={product.title} className="w-full h-full object-cover" />
           {product.badge && (
-            <span className="absolute top-1.5 left-1.5 bg-[#FD4D38] text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full">
+            <span className="absolute top-1.5 left-1.5 bg-[#3b82f6] text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full">
               {product.badge}
             </span>
           )}
@@ -44,7 +44,7 @@ export default function ProductCard({ product, variant = 'grid' }: Props) {
           onClick={(e) => { e.stopPropagation(); toggleWishlist(product.id); }}
           className="shrink-0 self-start mt-1"
         >
-          <Heart size={18} className={isWished ? 'text-[#FD4D38] fill-[#FD4D38]' : 'text-gray-300'} />
+          <Heart size={18} className={isWished ? 'text-[#3b82f6] fill-[#3b82f6]' : 'text-gray-300'} />
         </button>
       </button>
     );
@@ -58,7 +58,7 @@ export default function ProductCard({ product, variant = 'grid' }: Props) {
       <div className="aspect-[4/5] relative bg-gray-100 overflow-hidden">
         <img src={product.image} alt={product.title} className="w-full h-full object-cover" />
         {product.badge && (
-          <span className="absolute top-2 left-2 bg-[#FD4D38] text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wide">
+          <span className="absolute top-2 left-2 bg-[#3b82f6] text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wide">
             {product.badge}
           </span>
         )}
@@ -66,7 +66,7 @@ export default function ProductCard({ product, variant = 'grid' }: Props) {
           onClick={(e) => { e.stopPropagation(); toggleWishlist(product.id); }}
           className="absolute top-2 right-2 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center"
         >
-          <Heart size={16} className={isWished ? 'text-[#FD4D38] fill-[#FD4D38]' : 'text-gray-500'} />
+          <Heart size={16} className={isWished ? 'text-[#3b82f6] fill-[#3b82f6]' : 'text-gray-500'} />
         </button>
         {product.isHaggling && (
           <span className="absolute bottom-2 left-2 bg-emerald-500 text-white text-[9px] font-semibold px-2 py-0.5 rounded-full flex items-center gap-1">

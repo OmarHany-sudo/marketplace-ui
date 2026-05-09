@@ -28,13 +28,13 @@ export default function BottomNav() {
             <t.Icon
               size={24}
               strokeWidth={isActive ? 2.5 : 1.5}
-              className={isActive ? 'text-[#FD4D38]' : 'text-gray-400'}
+              className={isActive ? 'text-[#3b82f6]' : 'text-gray-400'}
             />
-            <span className={`text-[10px] leading-tight ${isActive ? 'font-semibold text-[#FD4D38]' : 'text-gray-400'}`}>
+            <span className={`text-[10px] leading-tight ${isActive ? 'font-semibold text-[#3b82f6]' : 'text-gray-400'}`}>
               {t.label}
             </span>
             {isActive && (
-              <div className="absolute -bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#FD4D38]" />
+              <div className="absolute -bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#3b82f6]" />
             )}
           </button>
         );

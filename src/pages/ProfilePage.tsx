@@ -30,7 +30,7 @@ export default function ProfilePage() {
             <p className="text-sm text-gray-400">alex.johnson@email.com</p>
             <button
               onClick={() => selectStore(myStore.id)}
-              className="mt-1 text-xs text-[#FD4D38] font-semibold"
+              className="mt-1 text-xs text-[#3b82f6] font-semibold"
             >
               View My Store
             </button>
@@ -72,7 +72,7 @@ export default function ProfilePage() {
                 </div>
                 <span className="flex-1 text-sm font-medium text-gray-900">{item.label}</span>
                 {item.badge && (
-                  <span className="text-[10px] font-semibold text-[#FD4D38] bg-[#FFF0EF] px-2 py-0.5 rounded-full">{item.badge}</span>
+                  <span className="text-[10px] font-semibold text-[#3b82f6] bg-[#FFF0EF] px-2 py-0.5 rounded-full">{item.badge}</span>
                 )}
                 <ChevronRight size={16} className="text-gray-300" />
               </button>
@@ -94,7 +94,7 @@ export default function ProfilePage() {
 
         {/* Logout */}
         <div className="px-4 pb-8">
-          <button className="w-full flex items-center justify-center gap-2 py-3 text-red-500 text-sm font-semibold active:bg-red-50 rounded-2xl">
+          <button className="w-full flex items-center justify-center gap-2 py-3 text-blue-500 text-sm font-semibold active:bg-blue-50 rounded-2xl">
             <LogOut size={16} />
             Sign Out
           </button>

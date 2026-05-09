@@ -31,7 +31,7 @@ export default function SearchPage() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search products, brands..."
-            className="w-full h-11 pl-9 pr-9 bg-gray-100 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#FD4D38]/20"
+            className="w-full h-11 pl-9 pr-9 bg-gray-100 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#3b82f6]/20"
             autoFocus
           />
           {query && (
@@ -74,7 +74,7 @@ export default function SearchPage() {
                     onClick={() => setQuery(s)}
                     className="flex items-center gap-2 px-3 py-2 bg-gray-50 rounded-full text-xs font-medium text-gray-600 active:scale-95"
                   >
-                    <span className="text-[#FD4D38] font-bold">{i + 1}</span>
+                    <span className="text-[#3b82f6] font-bold">{i + 1}</span>
                     {s}
                   </button>
                 ))}

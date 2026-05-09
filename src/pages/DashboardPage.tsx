@@ -47,7 +47,7 @@ export default function DashboardPage() {
                 <div className="w-8 h-8 rounded-xl bg-gray-100 flex items-center justify-center">
                   <stat.icon size={16} className="text-gray-600" />
                 </div>
-                <div className={`flex items-center gap-0.5 text-[10px] font-bold ${stat.up ? 'text-emerald-500' : 'text-red-500'}`}>
+                <div className={`flex items-center gap-0.5 text-[10px] font-bold ${stat.up ? 'text-emerald-500' : 'text-blue-500'}`}>
                   {stat.up ? <TrendingUp size={10} /> : <TrendingDown size={10} />}
                   {stat.change}
                 </div>
@@ -65,7 +65,7 @@ export default function DashboardPage() {
             {['Add Product', 'View Analytics', 'Promote Store'].map((action) => (
               <button key={action} className="flex-1 p-3 bg-white rounded-2xl text-center active:scale-[0.98] transition-transform">
                 <div className="w-10 h-10 rounded-xl bg-[#FFF0EF] flex items-center justify-center mx-auto mb-1.5">
-                  <ArrowUpRight size={16} className="text-[#FD4D38]" />
+                  <ArrowUpRight size={16} className="text-[#3b82f6]" />
                 </div>
                 <p className="text-[11px] font-semibold text-gray-900">{action}</p>
               </button>
@@ -77,7 +77,7 @@ export default function DashboardPage() {
         <div>
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-sm font-semibold text-gray-900">Recent Orders</h3>
-            <button className="text-xs text-[#FD4D38] font-semibold">View All</button>
+            <button className="text-xs text-[#3b82f6] font-semibold">View All</button>
           </div>
           <div className="space-y-2">
             {recentOrders.map((order) => (
@@ -109,8 +109,8 @@ export default function DashboardPage() {
               const heights = [40, 65, 45, 80, 55, 90, 70];
               return (
                 <div key={day} className="flex-1 flex flex-col items-center gap-1">
-                  <div className="w-full bg-[#FD4D38]/10 rounded-t-lg relative" style={{ height: `${heights[i]}%` }}>
-                    <div className="absolute bottom-0 left-0 right-0 bg-[#FD4D38] rounded-t-lg" style={{ height: `${heights[i] * 0.6}%` }} />
+                  <div className="w-full bg-[#3b82f6]/10 rounded-t-lg relative" style={{ height: `${heights[i]}%` }}>
+                    <div className="absolute bottom-0 left-0 right-0 bg-[#3b82f6] rounded-t-lg" style={{ height: `${heights[i] * 0.6}%` }} />
                   </div>
                   <span className="text-[9px] text-gray-400">{day}</span>
                 </div>

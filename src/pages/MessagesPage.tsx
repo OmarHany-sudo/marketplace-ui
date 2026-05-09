@@ -22,7 +22,7 @@ export default function MessagesPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search conversations..."
-            className="w-full h-11 pl-9 pr-4 bg-gray-100 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#FD4D38]/20"
+            className="w-full h-11 pl-9 pr-4 bg-gray-100 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#3b82f6]/20"
           />
         </div>
       </header>
@@ -37,7 +37,7 @@ export default function MessagesPage() {
             <div className="relative shrink-0">
               <img src={conv.userAvatar} alt={conv.userName} className="w-12 h-12 rounded-full object-cover bg-gray-100" />
               {conv.unread > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 w-5 h-5 bg-[#FD4D38] rounded-full text-[9px] text-white font-bold flex items-center justify-center">
+                <span className="absolute -top-0.5 -right-0.5 w-5 h-5 bg-[#3b82f6] rounded-full text-[9px] text-white font-bold flex items-center justify-center">
                   {conv.unread}
                 </span>
               )}
@@ -48,7 +48,7 @@ export default function MessagesPage() {
                 <span className="text-[10px] text-gray-400">{conv.timestamp}</span>
               </div>
               {conv.productPreview && (
-                <p className="text-[10px] text-[#FD4D38] font-medium mt-0.5">Re: {conv.productPreview.title}</p>
+                <p className="text-[10px] text-[#3b82f6] font-medium mt-0.5">Re: {conv.productPreview.title}</p>
               )}
               <p className="text-xs text-gray-500 line-clamp-1 mt-0.5">{conv.lastMessage}</p>
             </div>

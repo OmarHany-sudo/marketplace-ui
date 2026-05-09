@@ -44,10 +44,10 @@ export default function CheckoutPage() {
         <div className="p-4 bg-gray-50 rounded-2xl">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
-              <MapPin size={16} className="text-[#FD4D38]" />
+              <MapPin size={16} className="text-[#3b82f6]" />
               <h3 className="text-sm font-semibold text-gray-900">Delivery Address</h3>
             </div>
-            <button className="text-xs text-[#FD4D38] font-semibold">Edit</button>
+            <button className="text-xs text-[#3b82f6] font-semibold">Edit</button>
           </div>
           <p className="text-sm text-gray-600">123 Main Street, Apt 4B</p>
           <p className="text-sm text-gray-600">New York, NY 10001</p>
@@ -61,10 +61,10 @@ export default function CheckoutPage() {
               <button
                 key={opt.id}
                 onClick={() => setSelectedDelivery(opt.id)}
-                className={`w-full flex items-center gap-3 p-3 rounded-2xl border-2 text-left transition-colors ${selectedDelivery === opt.id ? 'border-[#FD4D38] bg-[#FFF0EF]' : 'border-gray-100 bg-white'}`}
+                className={`w-full flex items-center gap-3 p-3 rounded-2xl border-2 text-left transition-colors ${selectedDelivery === opt.id ? 'border-[#3b82f6] bg-[#FFF0EF]' : 'border-gray-100 bg-white'}`}
               >
-                <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 ${selectedDelivery === opt.id ? 'border-[#FD4D38]' : 'border-gray-300'}`}>
-                  {selectedDelivery === opt.id && <div className="w-2.5 h-2.5 rounded-full bg-[#FD4D38]" />}
+                <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 ${selectedDelivery === opt.id ? 'border-[#3b82f6]' : 'border-gray-300'}`}>
+                  {selectedDelivery === opt.id && <div className="w-2.5 h-2.5 rounded-full bg-[#3b82f6]" />}
                 </div>
                 <div className="flex-1">
                   <p className="text-sm font-semibold text-gray-900">{opt.name}</p>
@@ -81,7 +81,7 @@ export default function CheckoutPage() {
         {/* Payment Method */}
         <div className="p-4 bg-gray-50 rounded-2xl">
           <div className="flex items-center gap-2 mb-2">
-            <CreditCard size={16} className="text-[#FD4D38]" />
+            <CreditCard size={16} className="text-[#3b82f6]" />
             <h3 className="text-sm font-semibold text-gray-900">Payment Method</h3>
           </div>
           <div className="flex items-center gap-3">
@@ -96,7 +96,7 @@ export default function CheckoutPage() {
         {/* Coupon */}
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <Tag size={16} className="text-[#FD4D38]" />
+            <Tag size={16} className="text-[#3b82f6]" />
             <h3 className="text-sm font-semibold text-gray-900">Coupon Code</h3>
           </div>
           <div className="flex gap-2">
@@ -105,7 +105,7 @@ export default function CheckoutPage() {
               value={couponCode}
               onChange={(e) => setCouponCode(e.target.value)}
               placeholder="Enter code (try SAVE10)"
-              className="flex-1 h-11 px-4 bg-gray-100 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#FD4D38]/20"
+              className="flex-1 h-11 px-4 bg-gray-100 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#3b82f6]/20"
             />
             <button
               onClick={applyCoupon}
@@ -149,7 +149,7 @@ export default function CheckoutPage() {
       <div className="shrink-0 p-4 bg-white border-t border-gray-100">
         <button
           onClick={handlePlaceOrder}
-          className="w-full h-14 bg-[#FD4D38] text-white font-semibold rounded-full active:scale-[0.98] transition-transform shadow-lg shadow-[#FD4D38]/25"
+          className="w-full h-14 bg-[#3b82f6] text-white font-semibold rounded-full active:scale-[0.98] transition-transform shadow-lg shadow-[#3b82f6]/25"
         >
           Place Order - ${total.toFixed(2)}
         </button>

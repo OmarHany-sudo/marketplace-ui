@@ -38,7 +38,7 @@ export default function ProductDetailPage() {
           </button>
           <div className="flex items-center gap-2">
             <button onClick={() => toggleWishlist(product.id)} className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm active:scale-95">
-              <Heart size={18} className={isWished ? 'text-[#FD4D38] fill-[#FD4D38]' : 'text-gray-700'} />
+              <Heart size={18} className={isWished ? 'text-[#3b82f6] fill-[#3b82f6]' : 'text-gray-700'} />
             </button>
             <button className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm active:scale-95">
               <Share2 size={18} className="text-gray-700" />
@@ -49,7 +49,7 @@ export default function ProductDetailPage() {
           </div>
         </div>
         {discount > 0 && (
-          <span className="absolute bottom-3 left-3 bg-[#FD4D38] text-white text-xs font-bold px-2.5 py-1 rounded-full">
+          <span className="absolute bottom-3 left-3 bg-[#3b82f6] text-white text-xs font-bold px-2.5 py-1 rounded-full">
             -{discount}%
           </span>
         )}
@@ -134,7 +134,7 @@ export default function ProductDetailPage() {
                   <span className="text-xs text-gray-500">{seller.rating} ({seller.reviewCount})</span>
                 </div>
               </div>
-              <div className="flex items-center gap-1 text-[#FD4D38]">
+              <div className="flex items-center gap-1 text-[#3b82f6]">
                 <Store size={14} />
                 <span className="text-xs font-semibold">Visit Store</span>
                 <ChevronRight size={14} />
@@ -146,7 +146,7 @@ export default function ProductDetailPage() {
           <div className="mb-4">
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-base font-bold text-gray-900">Reviews</h3>
-              <button onClick={() => navigate('reviews')} className="text-xs text-[#FD4D38] font-semibold">See All</button>
+              <button onClick={() => navigate('reviews')} className="text-xs text-[#3b82f6] font-semibold">See All</button>
             </div>
             {REVIEWS.slice(0, 2).map((r) => (
               <div key={r.id} className="flex gap-3 mb-3">
@@ -184,7 +184,7 @@ export default function ProductDetailPage() {
         </button>
         <button
           onClick={handleBuyNow}
-          className="flex-1 h-12 bg-[#FD4D38] text-white font-semibold rounded-full active:scale-[0.98] transition-transform shadow-lg shadow-[#FD4D38]/25 text-sm"
+          className="flex-1 h-12 bg-[#3b82f6] text-white font-semibold rounded-full active:scale-[0.98] transition-transform shadow-lg shadow-[#3b82f6]/25 text-sm"
         >
           Buy Now
         </button>

@@ -27,7 +27,7 @@ export default function CartPage() {
           <p className="text-sm text-gray-400 text-center mb-6">Looks like you haven't added anything to your cart yet.</p>
           <button
             onClick={() => navigate('home')}
-            className="h-12 px-8 bg-[#FD4D38] text-white font-semibold rounded-full active:scale-[0.98] shadow-lg shadow-[#FD4D38]/25"
+            className="h-12 px-8 bg-[#3b82f6] text-white font-semibold rounded-full active:scale-[0.98] shadow-lg shadow-[#3b82f6]/25"
           >
             Start Shopping
           </button>
@@ -63,8 +63,8 @@ export default function CartPage() {
                     <Plus size={12} />
                   </button>
                 </div>
-                <button onClick={() => removeFromCart(item.product.id)} className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center">
-                  <Trash2 size={14} className="text-red-400" />
+                <button onClick={() => removeFromCart(item.product.id)} className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center">
+                  <Trash2 size={14} className="text-blue-400" />
                 </button>
               </div>
             </div>
@@ -100,7 +100,7 @@ export default function CartPage() {
         </div>
         <button
           onClick={() => navigate('checkout')}
-          className="w-full h-14 bg-[#FD4D38] text-white font-semibold rounded-full active:scale-[0.98] transition-transform shadow-lg shadow-[#FD4D38]/25"
+          className="w-full h-14 bg-[#3b82f6] text-white font-semibold rounded-full active:scale-[0.98] transition-transform shadow-lg shadow-[#3b82f6]/25"
         >
           Proceed to Checkout
         </button>

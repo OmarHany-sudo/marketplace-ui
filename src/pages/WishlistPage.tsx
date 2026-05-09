@@ -21,7 +21,7 @@ export default function WishlistPage() {
           <p className="text-sm text-gray-400 text-center mb-6">Save items you love and they'll appear here.</p>
           <button
             onClick={() => navigate('home')}
-            className="h-12 px-8 bg-[#FD4D38] text-white font-semibold rounded-full active:scale-[0.98] shadow-lg shadow-[#FD4D38]/25 flex items-center gap-2"
+            className="h-12 px-8 bg-[#3b82f6] text-white font-semibold rounded-full active:scale-[0.98] shadow-lg shadow-[#3b82f6]/25 flex items-center gap-2"
           >
             <ShoppingBag size={16} />
             Explore Products

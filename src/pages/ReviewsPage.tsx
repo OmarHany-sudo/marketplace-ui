@@ -57,7 +57,7 @@ export default function ReviewsPage() {
             onChange={(e) => setReview(e.target.value)}
             placeholder="Share your experience with this product..."
             rows={6}
-            className="w-full px-4 py-3 bg-gray-100 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#FD4D38]/20 resize-none"
+            className="w-full px-4 py-3 bg-gray-100 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#3b82f6]/20 resize-none"
           />
         </div>
 
@@ -91,7 +91,7 @@ export default function ReviewsPage() {
         <button
           onClick={handleSubmit}
           disabled={rating === 0}
-          className="w-full h-14 bg-[#FD4D38] text-white font-semibold rounded-full active:scale-[0.98] transition-transform shadow-lg shadow-[#FD4D38]/25 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full h-14 bg-[#3b82f6] text-white font-semibold rounded-full active:scale-[0.98] transition-transform shadow-lg shadow-[#3b82f6]/25 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Submit Review
         </button>

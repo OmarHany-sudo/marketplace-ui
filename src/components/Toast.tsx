@@ -19,7 +19,7 @@ export default function Toast() {
   return (
     <div className="absolute top-4 left-4 right-4 z-[70] flex justify-center animate-in slide-in-from-top-2 fade-in duration-300">
       <div className="bg-gray-900 text-white px-4 py-3 rounded-2xl shadow-xl flex items-center gap-2.5 max-w-sm w-full">
-        {isSuccess ? <CheckCircle2 size={18} className="text-emerald-400 shrink-0" /> : <XCircle size={18} className="text-red-400 shrink-0" />}
+        {isSuccess ? <CheckCircle2 size={18} className="text-emerald-400 shrink-0" /> : <XCircle size={18} className="text-blue-400 shrink-0" />}
         <span className="text-sm font-medium">{state.toast.message}</span>
       </div>
     </div>

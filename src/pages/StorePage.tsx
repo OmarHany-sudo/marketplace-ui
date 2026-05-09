@@ -61,7 +61,7 @@ export default function StorePage() {
             </button>
             <button
               onClick={() => setFollowing(!following)}
-              className={`flex items-center gap-1 px-3 py-2 rounded-full active:scale-95 transition-all text-xs font-semibold ${following ? 'bg-gray-100 text-gray-700' : 'bg-[#FD4D38] text-white'}`}
+              className={`flex items-center gap-1 px-3 py-2 rounded-full active:scale-95 transition-all text-xs font-semibold ${following ? 'bg-gray-100 text-gray-700' : 'bg-[#3b82f6] text-white'}`}
             >
               <UserCheck size={14} />
               {following ? 'Following' : 'Follow'}
@@ -91,7 +91,7 @@ export default function StorePage() {
         {/* Badges */}
         <div className="flex flex-wrap gap-1.5 mt-3">
           {store.badges.map((badge) => (
-            <span key={badge} className="flex items-center gap-1 px-2 py-1 bg-[#FFF0EF] text-[#FD4D38] text-[10px] font-bold rounded-full">
+            <span key={badge} className="flex items-center gap-1 px-2 py-1 bg-[#FFF0EF] text-[#3b82f6] text-[10px] font-bold rounded-full">
               <Shield size={10} />
               {badge}
             </span>
@@ -105,10 +105,10 @@ export default function StorePage() {
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`flex-1 py-3 text-sm font-semibold capitalize transition-colors relative ${activeTab === tab ? 'text-[#FD4D38]' : 'text-gray-400'}`}
+            className={`flex-1 py-3 text-sm font-semibold capitalize transition-colors relative ${activeTab === tab ? 'text-[#3b82f6]' : 'text-gray-400'}`}
           >
             {tab}
-            {activeTab === tab && <div className="absolute bottom-0 left-1/4 right-1/4 h-0.5 bg-[#FD4D38] rounded-full" />}
+            {activeTab === tab && <div className="absolute bottom-0 left-1/4 right-1/4 h-0.5 bg-[#3b82f6] rounded-full" />}
           </button>
         ))}
       </div>

@@ -30,7 +30,7 @@ export default function HomePage() {
             <img src="/avatar1.jpg" alt="Profile" className="w-full h-full object-cover" />
           </button>
           <button className="flex items-center gap-1 text-sm text-gray-700">
-            <MapPin size={14} className="text-[#FD4D38]" />
+            <MapPin size={14} className="text-[#3b82f6]" />
             <span className="font-medium">New York, NY</span>
           </button>
           <div className="flex items-center gap-2">
@@ -39,7 +39,7 @@ export default function HomePage() {
             </button>
             <button className="w-9 h-9 rounded-full bg-gray-50 flex items-center justify-center relative active:scale-95">
               <Bell size={18} className="text-gray-700" />
-              <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#FD4D38] rounded-full text-[9px] text-white font-bold flex items-center justify-center">3</span>
+              <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#3b82f6] rounded-full text-[9px] text-white font-bold flex items-center justify-center">3</span>
             </button>
           </div>
         </div>
@@ -67,7 +67,7 @@ export default function HomePage() {
           </div>
           <div className="flex justify-center gap-1.5 mt-3">
             {PROMO_BANNERS.map((_, i) => (
-              <div key={i} className={`h-1.5 rounded-full transition-all duration-300 ${i === bannerIdx ? 'w-4 bg-[#FD4D38]' : 'w-1.5 bg-gray-300'}`} />
+              <div key={i} className={`h-1.5 rounded-full transition-all duration-300 ${i === bannerIdx ? 'w-4 bg-[#3b82f6]' : 'w-1.5 bg-gray-300'}`} />
             ))}
           </div>
         </div>
@@ -76,17 +76,17 @@ export default function HomePage() {
         <div className="px-4 pb-4">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-lg font-bold text-gray-900">Categories</h2>
-            <button className="text-xs text-[#FD4D38] font-semibold flex items-center gap-0.5">See All <ChevronRight size={14} /></button>
+            <button className="text-xs text-[#3b82f6] font-semibold flex items-center gap-0.5">See All <ChevronRight size={14} /></button>
           </div>
           <div className="flex gap-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-1">
             <button
               onClick={() => setActiveCategory('All')}
               className={`snap-start shrink-0 flex flex-col items-center gap-1.5 w-16 ${activeCategory === 'All' ? '' : ''}`}
             >
-              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-colors ${activeCategory === 'All' ? 'bg-[#FD4D38] text-white' : 'bg-gray-100 text-gray-500'}`}>
+              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-colors ${activeCategory === 'All' ? 'bg-[#3b82f6] text-white' : 'bg-gray-100 text-gray-500'}`}>
                 <SlidersHorizontal size={22} />
               </div>
-              <span className={`text-[10px] font-medium ${activeCategory === 'All' ? 'text-[#FD4D38]' : 'text-gray-500'}`}>All</span>
+              <span className={`text-[10px] font-medium ${activeCategory === 'All' ? 'text-[#3b82f6]' : 'text-gray-500'}`}>All</span>
             </button>
             {CATEGORIES.map((cat) => {
               const IconComp = ICON_MAP[cat.icon] || Smartphone;
@@ -97,10 +97,10 @@ export default function HomePage() {
                   onClick={() => setActiveCategory(isActive ? 'All' : cat.name)}
                   className="snap-start shrink-0 flex flex-col items-center gap-1.5 w-16"
                 >
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-colors ${isActive ? 'bg-[#FD4D38] text-white' : 'bg-gray-100 text-gray-500'}`}>
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-colors ${isActive ? 'bg-[#3b82f6] text-white' : 'bg-gray-100 text-gray-500'}`}>
                     <IconComp size={22} />
                   </div>
-                  <span className={`text-[10px] font-medium ${isActive ? 'text-[#FD4D38]' : 'text-gray-500'}`}>{cat.name}</span>
+                  <span className={`text-[10px] font-medium ${isActive ? 'text-[#3b82f6]' : 'text-gray-500'}`}>{cat.name}</span>
                 </button>
               );
             })}
@@ -128,7 +128,7 @@ export default function HomePage() {
         <div className="px-4 pb-4">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-lg font-bold text-gray-900">Featured</h2>
-            <button className="text-xs text-[#FD4D38] font-semibold flex items-center gap-0.5">View All <ChevronRight size={14} /></button>
+            <button className="text-xs text-[#3b82f6] font-semibold flex items-center gap-0.5">View All <ChevronRight size={14} /></button>
           </div>
           <div className="grid grid-cols-2 gap-3">
             {filtered.slice(0, 4).map((p) => (
@@ -141,7 +141,7 @@ export default function HomePage() {
         <div className="px-4 pb-4">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-lg font-bold text-gray-900">Trending Stores</h2>
-            <button className="text-xs text-[#FD4D38] font-semibold flex items-center gap-0.5">See All <ChevronRight size={14} /></button>
+            <button className="text-xs text-[#3b82f6] font-semibold flex items-center gap-0.5">See All <ChevronRight size={14} /></button>
           </div>
           <div className="flex gap-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-1">
             {STORES.map((store) => (

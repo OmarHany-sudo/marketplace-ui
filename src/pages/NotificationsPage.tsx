@@ -3,11 +3,11 @@ import { useApp } from '../context/AppContext';
 
 const NOTIFICATIONS = [
   { id: 'n1', icon: ShoppingBag, title: 'Order Shipped', text: 'Your order #MK-8942 has been shipped and is on its way!', time: '2 min ago', color: 'text-blue-500 bg-blue-50' },
-  { id: 'n2', icon: Tag, title: 'Special Offer', text: 'Get 20% off on all electronics this weekend only.', time: '1 hour ago', color: 'text-[#FD4D38] bg-[#FFF0EF]' },
+  { id: 'n2', icon: Tag, title: 'Special Offer', text: 'Get 20% off on all electronics this weekend only.', time: '1 hour ago', color: 'text-[#3b82f6] bg-[#FFF0EF]' },
   { id: 'n3', icon: MessageSquare, title: 'New Message', text: 'TechVault Store replied to your inquiry about the headphones.', time: '3 hours ago', color: 'text-emerald-500 bg-emerald-50' },
   { id: 'n4', icon: Star, title: 'Leave a Review', text: 'Your order has been delivered. Share your experience!', time: '1 day ago', color: 'text-amber-500 bg-amber-50' },
   { id: 'n5', icon: Info, title: 'Account Verified', text: 'Your seller account has been successfully verified.', time: '2 days ago', color: 'text-purple-500 bg-purple-50' },
-  { id: 'n6', icon: Bell, title: 'Price Drop', text: 'An item in your wishlist is now 15% off!', time: '3 days ago', color: 'text-[#FD4D38] bg-[#FFF0EF]' },
+  { id: 'n6', icon: Bell, title: 'Price Drop', text: 'An item in your wishlist is now 15% off!', time: '3 days ago', color: 'text-[#3b82f6] bg-[#FFF0EF]' },
 ];
 
 export default function NotificationsPage() {
@@ -22,7 +22,7 @@ export default function NotificationsPage() {
           </button>
           <h1 className="text-lg font-bold text-gray-900">Notifications</h1>
         </div>
-        <button className="text-xs text-[#FD4D38] font-semibold">Settings</button>
+        <button className="text-xs text-[#3b82f6] font-semibold">Settings</button>
       </header>
 
       <div className="flex-1 overflow-y-auto no-scrollbar">
