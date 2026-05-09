@@ -19,7 +19,12 @@ export type Screen =
   | 'dashboard'
   | 'reviews'
   | 'notifications'
-  | 'order-success';
+  | 'order-success'
+  | 'seller-dashboard'
+  | 'admin-dashboard'
+  | 'inventory'
+  | 'orders-mgmt'
+  | 'theme-mgmt';
 
 interface AppState {
   screen: Screen;

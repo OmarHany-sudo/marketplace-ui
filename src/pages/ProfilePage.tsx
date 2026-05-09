@@ -1,4 +1,4 @@
-import { Settings, ChevronRight, Package, Heart, MessageSquare, Star, HelpCircle, Shield, MapPin, LogOut } from 'lucide-react';
+import { Settings, ChevronRight, Package, Heart, MessageSquare, Star, HelpCircle, Shield, MapPin, LogOut, LayoutDashboard, ShieldCheck } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { STORES } from '../data/mock';
 
@@ -15,6 +15,8 @@ export default function ProfilePage() {
     { icon: MapPin, label: 'Addresses', badge: null, screen: 'home' as const },
     { icon: HelpCircle, label: 'Help Center', badge: null, screen: 'home' as const },
     { icon: Settings, label: 'Settings', badge: null, screen: 'home' as const },
+    { icon: LayoutDashboard, label: 'Merchant Dashboard', badge: 'Pro', screen: 'seller-dashboard' as const },
+    { icon: ShieldCheck, label: 'Admin Dashboard', badge: 'Staff', screen: 'admin-dashboard' as const },
   ];
 
   return (

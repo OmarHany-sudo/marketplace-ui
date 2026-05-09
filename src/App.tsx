@@ -16,6 +16,8 @@ import SellPage from './pages/SellPage';
 import SellFormPage from './pages/SellFormPage';
 import ProfilePage from './pages/ProfilePage';
 import DashboardPage from './pages/DashboardPage';
+import SellerDashboardPage from './pages/SellerDashboardPage';
+import AdminDashboardPage from './pages/AdminDashboardPage';
 import ReviewsPage from './pages/ReviewsPage';
 import NotificationsPage from './pages/NotificationsPage';
 import SearchPage from './pages/SearchPage';
@@ -54,6 +56,10 @@ function ScreenRouter() {
       return <ProfilePage />;
     case 'dashboard':
       return <DashboardPage />;
+    case 'seller-dashboard':
+      return <SellerDashboardPage />;
+    case 'admin-dashboard':
+      return <AdminDashboardPage />;
     case 'reviews':
       return <ReviewsPage />;
     case 'notifications':
