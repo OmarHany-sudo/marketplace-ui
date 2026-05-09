@@ -1,4 +1,4 @@
-import { LayoutDashboard, Package, ShoppingBag, BarChart3, Settings, Users, Plus, AlertCircle, ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import { Package, ShoppingBag, BarChart3, Settings, Plus, AlertCircle, ArrowUpRight, ArrowDownRight } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 
 const STATS = [

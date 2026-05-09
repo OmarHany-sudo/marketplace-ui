@@ -18,7 +18,7 @@ const ADMIN_SECTIONS = [
 ];
 
 export default function AdminDashboardPage() {
-  const { navigate } = useApp();
+  // const { navigate } = useApp();
 
   return (
     <div className="flex flex-col h-full bg-gray-50">
