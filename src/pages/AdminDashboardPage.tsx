@@ -1,5 +1,4 @@
 import { ShieldCheck, Users, Store, ShoppingCart, AlertTriangle, CreditCard, BarChart3, Layers, Image as ImageIcon, Plus } from 'lucide-react';
-import { useApp } from '../context/AppContext';
 
 const ADMIN_STATS = [
   { label: 'Total Revenue', value: '$142,850', change: '+8.2%', up: true, icon: CreditCard, color: 'text-blue-600 bg-blue-50' },
