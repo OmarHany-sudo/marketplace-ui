@@ -113,7 +113,7 @@ export default function SellerDashboardPage() {
         {/* Revenue Summary Chart Placeholder */}
         <div className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-sm font-bold text-gray-900">Revenue Summary</h2>
+            <h2 className="text-sm font-bold text-gray-900">Sales Summary</h2>
             <select className="text-[10px] font-semibold bg-gray-50 border-none rounded-lg px-2 py-1">
               <option>This Week</option>
               <option>This Month</option>

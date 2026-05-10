@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { ChevronLeft, Share2, MoreHorizontal, Heart, Star, MessageCircle, Shield, Truck, RotateCcw, ChevronRight, Store } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { ChevronLeft, MoreHorizontal, Heart, Star, MessageCircle, RotateCcw, ChevronRight, Store, ShoppingCart } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { PRODUCTS, STORES, REVIEWS } from '../data/mock';
 
 export default function ProductDetailPage() {
   const { state, goBack, toggleWishlist, addToCart, navigate, selectStore } = useApp();
-  const [haggleOn, setHaggleOn] = useState(false);
   const [qty, setQty] = useState(1);
+  const [scrollY, setScrollY] = useState(0);
 
   const product = PRODUCTS.find((p) => p.id === state.selectedProductId);
   if (!product) return null;
@@ -15,176 +15,166 @@ export default function ProductDetailPage() {
   const seller = STORES.find((s) => s.id === product.sellerId);
   const discount = product.originalPrice ? Math.round((1 - product.price / product.originalPrice) * 100) : 0;
 
-  const handleBuyNow = () => {
-    addToCart(product);
-    navigate('checkout');
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    setScrollY(e.currentTarget.scrollTop);
   };
 
-  const handleAddToCart = () => {
-    for (let i = 0; i < qty; i++) addToCart(product);
-    navigate('cart');
-  };
+  // Animation values
+  const imageSize = Math.max(120, 400 - scrollY);
+  const imageOpacity = Math.max(0.5, 1 - scrollY / 300);
 
   return (
-    <div className="flex flex-col h-full bg-white">
-      {/* Gallery + Floating Header */}
-      <div className="relative shrink-0">
-        <div className="aspect-square bg-gray-100 overflow-hidden">
-          <img src={product.image} alt={product.title} className="w-full h-full object-cover" />
-        </div>
-        <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
-          <button onClick={goBack} className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm active:scale-95">
-            <ChevronLeft size={20} className="text-gray-800" />
+    <div className="flex flex-col h-full bg-white relative">
+      {/* Header Bar (Fixed) */}
+      <div className={`absolute top-0 left-0 right-0 px-4 py-3 flex items-center justify-between z-50 transition-colors duration-300 ${scrollY > 100 ? 'bg-white shadow-sm' : ''}`}>
+        <button 
+          onClick={goBack} 
+          className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${scrollY > 100 ? 'bg-gray-100 text-gray-800' : 'bg-black/20 backdrop-blur-md text-white'}`}
+        >
+          <ChevronLeft size={24} />
+        </button>
+        <div className="flex items-center gap-2">
+          <button 
+            onClick={() => toggleWishlist(product.id)} 
+            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${scrollY > 100 ? 'bg-gray-100 text-gray-800' : 'bg-black/20 backdrop-blur-md text-white'}`}
+          >
+            <Heart size={20} className={isWished ? 'fill-blue-500 text-blue-500' : ''} />
           </button>
-          <div className="flex items-center gap-2">
-            <button onClick={() => toggleWishlist(product.id)} className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm active:scale-95">
-              <Heart size={18} className={isWished ? 'text-[#3b82f6] fill-[#3b82f6]' : 'text-gray-700'} />
-            </button>
-            <button className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm active:scale-95">
-              <Share2 size={18} className="text-gray-700" />
-            </button>
-            <button className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm active:scale-95">
-              <MoreHorizontal size={18} className="text-gray-700" />
-            </button>
-          </div>
+          <button className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${scrollY > 100 ? 'bg-gray-100 text-gray-800' : 'bg-black/20 backdrop-blur-md text-white'}`}>
+            <MoreHorizontal size={20} />
+          </button>
         </div>
+      </div>
+
+      {/* Hero Image (Animated) */}
+      <div 
+        className="shrink-0 relative bg-gray-50 overflow-hidden flex items-center justify-center"
+        style={{ height: `${imageSize}px`, opacity: imageOpacity }}
+      >
+        <img src={product.image} alt={product.title} className="w-full h-full object-cover" />
         {discount > 0 && (
-          <span className="absolute bottom-3 left-3 bg-[#3b82f6] text-white text-xs font-bold px-2.5 py-1 rounded-full">
-            -{discount}%
+          <span className="absolute bottom-4 left-4 bg-blue-600 text-white text-xs font-black px-3 py-1 rounded-full shadow-lg">
+            -{discount}% OFF
           </span>
         )}
       </div>
 
       {/* Content */}
-      <div className="flex-1 overflow-y-auto no-scrollbar">
-        <div className="p-4">
-          {/* Price & Haggle */}
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-bold text-gray-900">${product.price}</span>
-              {product.originalPrice && (
-                <span className="text-sm text-gray-400 line-through">${product.originalPrice}</span>
-              )}
-            </div>
-            {product.isHaggling && (
-              <button
-                onClick={() => setHaggleOn(!haggleOn)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-colors ${haggleOn ? 'bg-emerald-500 text-white' : 'bg-gray-100 text-gray-600'}`}
-              >
-                <MessageCircle size={13} />
-                {haggleOn ? 'Haggle On' : 'Haggle'}
-              </button>
+      <div 
+        onScroll={handleScroll}
+        className="flex-1 overflow-y-auto no-scrollbar"
+      >
+        <div className="p-5">
+          {/* Price & Title */}
+          <div className="flex items-baseline gap-2 mb-1">
+            <span className="text-3xl font-black text-gray-900">${product.price}</span>
+            {product.originalPrice && (
+              <span className="text-base text-gray-400 line-through font-medium">${product.originalPrice}</span>
             )}
           </div>
+          <h1 className="text-xl font-bold text-gray-900 leading-tight mb-3">{product.title}</h1>
 
-          {/* Title */}
-          <h1 className="text-lg font-bold text-gray-900 leading-snug mb-2">{product.title}</h1>
-
-          {/* Rating */}
-          <div className="flex items-center gap-2 mb-3">
-            <div className="flex items-center gap-0.5">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} size={14} className={i < Math.round(product.rating) ? 'text-amber-400 fill-amber-400' : 'text-gray-200'} />
-              ))}
+          {/* Rating & Stats */}
+          <div className="flex items-center gap-4 mb-5">
+            <div className="flex items-center gap-1">
+              <Star size={16} className="text-amber-400 fill-amber-400" />
+              <span className="text-sm font-bold text-gray-900">{product.rating}</span>
+              <span className="text-xs text-gray-400">({product.reviewCount})</span>
             </div>
-            <span className="text-xs font-medium text-gray-600">{product.rating}</span>
-            <span className="text-xs text-gray-400">({product.reviewCount} reviews)</span>
+            <div className="w-px h-3 bg-gray-200" />
+            <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">{product.condition}</span>
+            <div className="w-px h-3 bg-gray-200" />
+            <span className="text-xs text-gray-500 font-medium">{product.location}</span>
           </div>
 
-          {/* Condition & Location */}
-          <div className="flex items-center gap-2 mb-4">
-            <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide ${product.condition === 'new' ? 'bg-emerald-50 text-emerald-600' : product.condition === 'used' ? 'bg-amber-50 text-amber-600' : 'bg-blue-50 text-blue-600'}`}>
-              {product.condition}
-            </span>
-            <span className="text-xs text-gray-400">{product.location}</span>
-            <span className="text-xs text-gray-300">|</span>
-            <span className="text-xs text-gray-400">{product.postedAt}</span>
-          </div>
-
-          {/* Trust Badges */}
-          <div className="flex items-center gap-4 py-3 border-y border-gray-100 mb-4">
-            <div className="flex items-center gap-1.5">
-              <Shield size={14} className="text-emerald-500" />
-              <span className="text-[10px] font-medium text-gray-600">Protected</span>
+          {/* Trust Badge (Simplified) */}
+          <div className="flex items-center gap-3 py-4 border-y border-gray-50 mb-6">
+            <div className="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center text-purple-600">
+              <RotateCcw size={20} />
             </div>
-            <div className="flex items-center gap-1.5">
-              <Truck size={14} className="text-blue-500" />
-              <span className="text-[10px] font-medium text-gray-600">Fast Shipping</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <RotateCcw size={14} className="text-purple-500" />
-              <span className="text-[10px] font-medium text-gray-600">30-Day Returns</span>
+            <div>
+              <h4 className="text-xs font-bold text-gray-900">30-Day Returns</h4>
+              <p className="text-[10px] text-gray-500">Hassle-free exchange or refund</p>
             </div>
           </div>
 
           {/* Description */}
-          <p className="text-sm text-gray-600 leading-relaxed mb-4">{product.description}</p>
+          <div className="mb-8">
+            <h3 className="text-sm font-bold text-gray-900 mb-2">Description</h3>
+            <p className="text-sm text-gray-600 leading-relaxed">{product.description}</p>
+          </div>
 
           {/* Seller Card */}
           {seller && (
-            <button
-              onClick={() => selectStore(seller.id)}
-              className="w-full flex items-center gap-3 p-3 bg-gray-50 rounded-2xl text-left active:scale-[0.99] transition-transform mb-4"
-            >
-              <img src={seller.avatar} alt={seller.name} className="w-12 h-12 rounded-full object-cover" />
-              <div className="flex-1 min-w-0">
-                <h3 className="text-sm font-semibold text-gray-900">{seller.name}</h3>
-                <div className="flex items-center gap-1">
-                  <Star size={11} className="text-amber-400 fill-amber-400" />
-                  <span className="text-xs text-gray-500">{seller.rating} ({seller.reviewCount})</span>
+            <div className="bg-gray-50 rounded-3xl p-4 mb-8">
+              <div className="flex items-center gap-4 mb-4">
+                <img src={seller.avatar} alt={seller.name} className="w-14 h-14 rounded-2xl object-cover shadow-sm" />
+                <div className="flex-1">
+                  <h3 className="text-base font-bold text-gray-900">{seller.name}</h3>
+                  <p className="text-xs text-gray-500 font-medium">Verified Merchant</p>
                 </div>
+                <button className="px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-xl shadow-md shadow-blue-100 active:scale-95 transition-transform">
+                  Follow
+                </button>
               </div>
-              <div className="flex items-center gap-1 text-[#3b82f6]">
-                <Store size={14} />
-                <span className="text-xs font-semibold">Visit Store</span>
-                <ChevronRight size={14} />
+              <div className="grid grid-cols-2 gap-3">
+                <button 
+                  onClick={() => selectStore(seller.id)}
+                  className="flex items-center justify-center gap-2 py-3 bg-white rounded-2xl text-xs font-bold text-gray-700 shadow-sm active:bg-gray-50"
+                >
+                  <Store size={16} /> Visit Store
+                </button>
+                <button className="flex items-center justify-center gap-2 py-3 bg-white rounded-2xl text-xs font-bold text-gray-700 shadow-sm active:bg-gray-50">
+                  <MessageCircle size={16} /> Message
+                </button>
               </div>
-            </button>
+            </div>
           )}
 
-          {/* Reviews Preview */}
-          <div className="mb-4">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-base font-bold text-gray-900">Reviews</h3>
-              <button onClick={() => navigate('reviews')} className="text-xs text-[#3b82f6] font-semibold">See All</button>
+          {/* Reviews Section */}
+          <div className="mb-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-base font-bold text-gray-900">Customer Reviews</h3>
+              <button onClick={() => navigate('reviews')} className="text-xs text-blue-600 font-bold">See All</button>
             </div>
-            {REVIEWS.slice(0, 2).map((r) => (
-              <div key={r.id} className="flex gap-3 mb-3">
-                <img src={r.avatar} alt={r.userName} className="w-8 h-8 rounded-full object-cover shrink-0" />
-                <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-semibold text-gray-900">{r.userName}</span>
-                    <div className="flex">
+            <div className="space-y-4">
+              {REVIEWS.slice(0, 2).map((r) => (
+                <div key={r.id} className="bg-white border border-gray-50 rounded-2xl p-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <img src={r.avatar} alt={r.userName} className="w-8 h-8 rounded-full object-cover" />
+                      <span className="text-xs font-bold text-gray-900">{r.userName}</span>
+                    </div>
+                    <div className="flex gap-0.5">
                       {[...Array(5)].map((_, i) => (
                         <Star key={i} size={10} className={i < r.rating ? 'text-amber-400 fill-amber-400' : 'text-gray-200'} />
                       ))}
                     </div>
                   </div>
-                  <p className="text-xs text-gray-500 mt-0.5">{r.text}</p>
-                  <span className="text-[10px] text-gray-400">{r.date}</span>
+                  <p className="text-xs text-gray-600 leading-relaxed">{r.text}</p>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom CTA */}
-      <div className="shrink-0 p-4 bg-white border-t border-gray-100 flex items-center gap-3 z-40">
-        <div className="flex items-center gap-2 bg-gray-100 rounded-full px-3 h-12">
-          <button onClick={() => setQty(Math.max(1, qty - 1))} className="w-7 h-7 rounded-full bg-white flex items-center justify-center text-sm font-bold text-gray-700">-</button>
-          <span className="text-sm font-semibold w-4 text-center">{qty}</span>
-          <button onClick={() => setQty(qty + 1)} className="w-7 h-7 rounded-full bg-white flex items-center justify-center text-sm font-bold text-gray-700">+</button>
+      {/* Bottom Action Bar */}
+      <div className="shrink-0 p-4 bg-white border-t border-gray-50 flex items-center gap-4 z-40">
+        <div className="flex items-center gap-3 bg-gray-100 rounded-2xl px-3 h-14">
+          <button onClick={() => setQty(Math.max(1, qty - 1))} className="w-8 h-8 rounded-xl bg-white flex items-center justify-center text-lg font-black text-gray-700 shadow-sm">-</button>
+          <span className="text-sm font-black w-4 text-center">{qty}</span>
+          <button onClick={() => setQty(qty + 1)} className="w-8 h-8 rounded-xl bg-white flex items-center justify-center text-lg font-black text-gray-700 shadow-sm">+</button>
         </div>
         <button
-          onClick={handleAddToCart}
-          className="flex-1 h-12 bg-gray-900 text-white font-semibold rounded-full active:scale-[0.98] transition-transform text-sm"
+          onClick={() => { for(let i=0; i<qty; i++) addToCart(product); navigate('cart'); }}
+          className="flex-1 h-14 bg-gray-900 text-white font-bold rounded-2xl active:scale-[0.98] transition-transform text-sm flex items-center justify-center gap-2"
         >
-          Add to Cart
+          <ShoppingCart size={18} /> Add to Cart
         </button>
         <button
-          onClick={handleBuyNow}
-          className="flex-1 h-12 bg-[#3b82f6] text-white font-semibold rounded-full active:scale-[0.98] transition-transform shadow-lg shadow-[#3b82f6]/25 text-sm"
+          onClick={() => { addToCart(product); navigate('checkout'); }}
+          className="flex-1 h-14 bg-blue-600 text-white font-bold rounded-2xl active:scale-[0.98] transition-transform shadow-lg shadow-blue-100 text-sm"
         >
           Buy Now
         </button>

@@ -18,6 +18,9 @@ import ProfilePage from './pages/ProfilePage';
 import DashboardPage from './pages/DashboardPage';
 import SellerDashboardPage from './pages/SellerDashboardPage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
+import InventoryPage from './pages/InventoryPage';
+import OrdersMgmtPage from './pages/OrdersMgmtPage';
+import ThemeMgmtPage from './pages/ThemeMgmtPage';
 import ReviewsPage from './pages/ReviewsPage';
 import NotificationsPage from './pages/NotificationsPage';
 import SearchPage from './pages/SearchPage';
@@ -60,6 +63,12 @@ function ScreenRouter() {
       return <SellerDashboardPage />;
     case 'admin-dashboard':
       return <AdminDashboardPage />;
+    case 'inventory':
+      return <InventoryPage />;
+    case 'orders-mgmt':
+      return <OrdersMgmtPage />;
+    case 'theme-mgmt':
+      return <ThemeMgmtPage />;
     case 'reviews':
       return <ReviewsPage />;
     case 'notifications':
