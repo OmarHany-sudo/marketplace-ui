@@ -1,4 +1,4 @@
-import { ChevronLeft, Search, Filter, MoreVertical, Package, AlertCircle, Edit2, Trash2 } from 'lucide-react';
+import { ChevronLeft, Search, Filter, Edit2, Trash2 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { PRODUCTS } from '../data/mock';
 

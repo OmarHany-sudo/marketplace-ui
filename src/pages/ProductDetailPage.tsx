@@ -1,5 +1,5 @@
-import { useState, useRef } from 'react';
-import { ChevronLeft, MoreHorizontal, Heart, Star, MessageCircle, RotateCcw, ChevronRight, Store, ShoppingCart } from 'lucide-react';
+import { useState } from 'react';
+import { ChevronLeft, MoreHorizontal, Heart, Star, MessageCircle, RotateCcw, Store, ShoppingCart } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { PRODUCTS, STORES, REVIEWS } from '../data/mock';
 

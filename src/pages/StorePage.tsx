@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { ChevronLeft, MessageCircle, UserCheck, Star, MapPin, Package, Users, MoreHorizontal } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { STORES, PRODUCTS } from '../data/mock';

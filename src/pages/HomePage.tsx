@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { Search, Bell, ShoppingCart, Menu, ChevronRight, Smartphone, Shirt, Home, Dumbbell, BookOpen, Gamepad2, Car, Palette } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { PRODUCTS, CATEGORIES, PROMO_BANNERS, STORES } from '../data/mock';
@@ -21,7 +21,6 @@ export default function HomePage() {
   // Animation values
   const heroHeight = Math.max(80, 240 - scrollY);
   const heroOpacity = Math.max(0, 1 - scrollY / 150);
-  const searchTranslateY = Math.min(0, -scrollY + 140); // Moves search up to header
   const isSticky = scrollY > 140;
 
   return (

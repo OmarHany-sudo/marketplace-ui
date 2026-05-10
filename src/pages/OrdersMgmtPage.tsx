@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronLeft, Search, Filter, Package, Clock, CheckCircle2, Truck, XCircle, ChevronRight } from 'lucide-react';
+import { ChevronLeft, Package, Clock, CheckCircle2, Truck, ChevronRight } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 
 const STATUSES = ['All', 'Pending', 'Confirmed', 'Shipping', 'Delivered'];

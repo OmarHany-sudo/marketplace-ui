@@ -1,4 +1,4 @@
-import { Heart, ShoppingCart, Store, Plus, Check } from 'lucide-react';
+import { Heart, Store, Plus, Check } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import type { Product } from '../data/mock';
 
@@ -7,7 +7,7 @@ interface Props {
 }
 
 export default function ProductCard({ product }: Props) {
-  const { selectProduct, selectStore, toggleWishlist, addToCart, state } = useApp();
+  const { selectProduct, selectStore, toggleWishlist, addToCart, state, navigate } = useApp();
   const isWished = state.wishlist.includes(product.id);
   const isInCart = state.cart.some(item => item.product.id === product.id);
 
