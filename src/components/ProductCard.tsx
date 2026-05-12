@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Heart, Store, Plus, Check, ShoppingCart } from 'lucide-react';
+import { Heart, Check, ShoppingCart } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import type { Product } from '../data/mock';
 
