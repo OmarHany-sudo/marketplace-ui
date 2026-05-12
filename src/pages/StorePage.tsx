@@ -60,7 +60,7 @@ export default function StorePage() {
         className="flex-1 overflow-y-auto no-scrollbar pt-16"
       >
         {/* Store Hero (Fixed-like behavior) */}
-        <div className="relative h-[260px] w-full overflow-hidden bg-gray-900">
+        <div className="relative h-[240px] w-full overflow-hidden bg-gray-900">
           <div 
             className="absolute inset-0 w-full h-full"
             style={{ 
@@ -71,32 +71,32 @@ export default function StorePage() {
             <img src={store.cover} alt={store.name} className="w-full h-full object-cover scale-110" />
             <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60" />
           </div>
-          
-          {/* Store Profile Info Overlay */}
-          <div className="absolute bottom-8 left-4 right-4 flex items-end gap-4">
-            <div className="w-22 h-22 rounded-[28px] border-4 border-white overflow-hidden bg-white shadow-2xl shrink-0">
+        </div>
+
+        {/* Content Area (Scrolls over hero) */}
+        <div className="relative bg-white rounded-t-[32px] -mt-12 z-10 shadow-[0_-12px_40px_rgba(0,0,0,0.08)] min-h-full">
+          {/* Store Profile Info Overlay (Now part of content area to avoid overlap) */}
+          <div className="px-6 -translate-y-1/2 flex items-end gap-4">
+            <div className="w-24 h-24 rounded-[32px] border-4 border-white overflow-hidden bg-white shadow-2xl shrink-0">
               <img src={store.avatar} alt={store.name} className="w-full h-full object-cover" />
             </div>
-            <div className="flex-1 pb-1">
-              <h1 className="text-2xl font-black text-white drop-shadow-lg tracking-tight">{store.name}</h1>
-              <div className="flex items-center gap-2 mt-1.5">
-                <div className="flex items-center gap-1 bg-white/20 backdrop-blur-md px-2.5 py-1 rounded-lg">
+            <div className="flex-1 pb-2">
+              <h1 className="text-2xl font-black text-gray-900 tracking-tight">{store.name}</h1>
+              <div className="flex items-center gap-2 mt-1">
+                <div className="flex items-center gap-1 bg-amber-50 px-2 py-0.5 rounded-lg">
                   <Star size={12} className="text-amber-400 fill-amber-400" />
-                  <span className="text-[11px] font-black text-white">{store.rating}</span>
+                  <span className="text-[11px] font-black text-amber-700">{store.rating}</span>
                 </div>
-                <div className="flex items-center gap-1 bg-white/20 backdrop-blur-md px-2.5 py-1 rounded-lg">
-                  <Users size={12} className="text-white" />
-                  <span className="text-[11px] font-black text-white">{store.followers.toLocaleString()}</span>
+                <div className="flex items-center gap-1 bg-blue-50 px-2 py-0.5 rounded-lg">
+                  <Users size={12} className="text-blue-600" />
+                  <span className="text-[11px] font-black text-blue-700">{store.followers.toLocaleString()}</span>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Content Area (Scrolls over hero) */}
-        <div className="relative bg-white rounded-t-[32px] -mt-6 z-10 shadow-[0_-12px_40px_rgba(0,0,0,0.08)]">
           {/* Store Actions & Description */}
-          <div className="p-6 space-y-6">
+          <div className="px-6 pb-6 -mt-6 space-y-6">
             <div className="flex gap-3">
               <button
                 onClick={handleFollow}
