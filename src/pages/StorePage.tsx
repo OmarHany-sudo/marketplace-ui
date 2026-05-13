@@ -73,63 +73,63 @@ export default function StorePage() {
           </div>
         </div>
 
-        {/* Content Area (Scrolls over hero) */}
-        <div className="relative bg-white rounded-t-[32px] -mt-12 z-10 shadow-[0_-12px_40px_rgba(0,0,0,0.08)] min-h-full">
-          {/* Store Profile Info Overlay (Now part of content area to avoid overlap) */}
-          <div className="px-6 -translate-y-1/2 flex items-end gap-4">
-            <div className="w-24 h-24 rounded-[32px] border-4 border-white overflow-hidden bg-white shadow-2xl shrink-0">
-              <img src={store.avatar} alt={store.name} className="w-full h-full object-cover" />
-            </div>
-            <div className="flex-1 pb-2">
-              <h1 className="text-2xl font-black text-gray-900 tracking-tight">{store.name}</h1>
-              <div className="flex items-center gap-2 mt-1">
-                <div className="flex items-center gap-1 bg-amber-50 px-2 py-0.5 rounded-lg">
-                  <Star size={12} className="text-amber-400 fill-amber-400" />
-                  <span className="text-[11px] font-black text-amber-700">{store.rating}</span>
-                </div>
-                <div className="flex items-center gap-1 bg-blue-50 px-2 py-0.5 rounded-lg">
-                  <Users size={12} className="text-blue-600" />
-                  <span className="text-[11px] font-black text-blue-700">{store.followers.toLocaleString()}</span>
+        {/* Content Area (Starts below hero) */}
+        <div className="relative bg-white z-10 min-h-full">
+          {/* Store Branding & Details (Below Cover) */}
+          <div className="px-6 pt-6 pb-4 flex flex-col gap-4">
+            <div className="flex items-center gap-4">
+              <div className="w-20 h-20 rounded-[24px] border-2 border-gray-100 overflow-hidden bg-white shadow-lg shrink-0">
+                <img src={store.avatar} alt={store.name} className="w-full h-full object-cover" />
+              </div>
+              <div className="flex-1">
+                <h1 className="text-2xl font-black text-gray-900 tracking-tight">{store.name}</h1>
+                <div className="flex items-center gap-2 mt-1.5">
+                  <div className="flex items-center gap-1 bg-amber-50 px-2 py-0.5 rounded-lg">
+                    <Star size={12} className="text-amber-400 fill-amber-400" />
+                    <span className="text-[11px] font-black text-amber-700">{store.rating}</span>
+                  </div>
+                  <div className="flex items-center gap-1 bg-blue-50 px-2 py-0.5 rounded-lg">
+                    <Users size={12} className="text-blue-600" />
+                    <span className="text-[11px] font-black text-blue-700">{store.followers.toLocaleString()}</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Store Actions & Description */}
-          <div className="px-6 pb-6 -mt-6 space-y-6">
-            <div className="flex gap-3">
+            {/* Store Actions */}
+            <div className="flex gap-3 mt-2">
               <button
                 onClick={handleFollow}
-                className={`flex-1 flex items-center justify-center gap-2 h-14 rounded-2xl font-black text-sm uppercase tracking-widest transition-all duration-300 ${
+                className={`flex-1 flex items-center justify-center gap-2 h-12 rounded-2xl font-black text-sm uppercase tracking-widest transition-all duration-300 ${
                   showCheck ? 'bg-emerald-500 text-white' :
                   following ? 'bg-gray-100 text-gray-500' : 'bg-blue-600 text-white shadow-xl shadow-blue-100'
                 }`}
               >
-                {showCheck ? <Check size={20} strokeWidth={3} /> : <UserCheck size={20} strokeWidth={2.5} />}
+                {showCheck ? <Check size={18} strokeWidth={3} /> : <UserCheck size={18} strokeWidth={2.5} />}
                 {showCheck ? 'Following' : following ? 'Unfollow' : 'Follow Store'}
               </button>
               <button
                 onClick={() => selectConversation('c1')}
-                className="w-14 h-14 flex items-center justify-center bg-gray-50 rounded-2xl text-gray-900 active:scale-95 transition-transform border border-gray-100"
+                className="w-12 h-12 flex items-center justify-center bg-gray-50 rounded-2xl text-gray-900 active:scale-95 transition-transform border border-gray-100"
               >
-                <MessageCircle size={24} strokeWidth={2.5} />
+                <MessageCircle size={22} strokeWidth={2.5} />
               </button>
             </div>
 
             {/* About Store */}
-            <div className="bg-gray-50/50 rounded-[32px] p-6 border border-gray-100">
-              <h3 className="text-[11px] font-black text-blue-600 uppercase tracking-[0.2em] mb-3">About Store</h3>
+            <div className="bg-gray-50/50 rounded-[28px] p-5 border border-gray-100 mt-2">
+              <h3 className="text-[10px] font-black text-blue-600 uppercase tracking-[0.2em] mb-2.5">About Store</h3>
               <p className="text-sm text-gray-600 font-medium leading-relaxed">{store.description}</p>
-              <div className="flex flex-wrap items-center gap-y-3 gap-x-6 mt-6 pt-6 border-t border-gray-200/50">
+              <div className="flex flex-wrap items-center gap-y-3 gap-x-6 mt-5 pt-5 border-t border-gray-200/50">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center shadow-sm">
-                    <MapPin size={16} className="text-blue-600" />
+                  <div className="w-7 h-7 rounded-lg bg-white flex items-center justify-center shadow-sm">
+                    <MapPin size={14} className="text-blue-600" />
                   </div>
                   <span className="text-xs font-black text-gray-900">{store.location}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center shadow-sm">
-                    <Package size={16} className="text-blue-600" />
+                  <div className="w-7 h-7 rounded-lg bg-white flex items-center justify-center shadow-sm">
+                    <Package size={14} className="text-blue-600" />
                   </div>
                   <span className="text-xs font-black text-gray-900">{store.productsCount} Products</span>
                 </div>
@@ -138,7 +138,7 @@ export default function StorePage() {
           </div>
 
           {/* Products Grid */}
-          <div className="px-4 pb-20">
+          <div className="px-4 pb-20 mt-4">
             <div className="flex items-center justify-between mb-6 px-2">
               <div className="flex flex-col">
                 <h2 className="text-xl font-black text-gray-900 tracking-tight">Store Listings</h2>
