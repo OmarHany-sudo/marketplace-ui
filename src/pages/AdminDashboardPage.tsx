@@ -1,23 +1,25 @@
 import { ShieldCheck, Users, Store, ShoppingCart, AlertTriangle, CreditCard, BarChart3, Layers, Image as ImageIcon, Plus } from 'lucide-react';
+import { useApp, type Screen } from '../context/AppContext';
 
 const ADMIN_STATS = [
   { label: 'Total Revenue', value: '$142,850', change: '+8.2%', up: true, icon: CreditCard, color: 'text-blue-600 bg-blue-50' },
   { label: 'Active Merchants', value: '156', change: '+12', up: true, icon: Store, color: 'text-purple-600 bg-purple-50' },
   { label: 'Total Orders', value: '1,240', change: '+156', up: true, icon: ShoppingCart, color: 'text-emerald-600 bg-emerald-50' },
   { label: 'Complaints', value: '5', change: '-2', up: false, icon: AlertTriangle, color: 'text-rose-600 bg-rose-50' },
+  { label: 'Subscriptions', value: '148', change: '+9', up: true, icon: CreditCard, color: 'text-indigo-600 bg-indigo-50' },
 ];
 
 const ADMIN_SECTIONS = [
-  { id: 'users', label: 'User Management', icon: Users, color: 'bg-blue-50 text-blue-600' },
-  { id: 'stores', label: 'Store Management', icon: Store, color: 'bg-purple-50 text-purple-600' },
+  { id: 'users-mgmt', label: 'User Management', icon: Users, color: 'bg-blue-50 text-blue-600' },
+  { id: 'stores-mgmt', label: 'Store Management', icon: Store, color: 'bg-purple-50 text-purple-600' },
   { id: 'finance', label: 'Financials', icon: CreditCard, color: 'bg-emerald-50 text-emerald-600' },
-  { id: 'categories', label: 'Categories', icon: Layers, color: 'bg-amber-50 text-amber-600' },
-  { id: 'banners', label: 'Banners', icon: ImageIcon, color: 'bg-rose-50 text-rose-600' },
+  { id: 'categories-mgmt', label: 'Categories', icon: Layers, color: 'bg-amber-50 text-amber-600' },
+  { id: 'banners-mgmt', label: 'Banners', icon: ImageIcon, color: 'bg-rose-50 text-rose-600' },
   { id: 'reports', label: 'Reports', icon: BarChart3, color: 'bg-indigo-50 text-indigo-600' },
 ];
 
 export default function AdminDashboardPage() {
-  // const { navigate } = useApp();
+  const { navigate, showToast } = useApp();
 
   return (
     <div className="flex flex-col h-full bg-gray-50">
@@ -33,7 +35,7 @@ export default function AdminDashboardPage() {
           </div>
         </div>
         <div className="flex gap-2">
-          <button className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 active:scale-95">
+          <button onClick={() => showToast('New admin task created')} className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 active:scale-95">
             <Plus size={20} />
           </button>
         </div>
@@ -41,7 +43,7 @@ export default function AdminDashboardPage() {
 
       <div className="flex-1 overflow-y-auto p-4 space-y-6 no-scrollbar">
         {/* KPI Grid */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-5">
           {ADMIN_STATS.map((stat, i) => (
             <div key={i} className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
               <div className={`w-9 h-9 rounded-xl ${stat.color} flex items-center justify-center mb-3`}>
@@ -63,6 +65,7 @@ export default function AdminDashboardPage() {
             {ADMIN_SECTIONS.map((section) => (
               <button 
                 key={section.id}
+                onClick={() => navigate(section.id as Screen)}
                 className="flex flex-col items-center gap-2 p-3 bg-white rounded-2xl border border-gray-100 active:scale-95 transition-transform"
               >
                 <div className={`w-12 h-12 rounded-2xl ${section.color} flex items-center justify-center shadow-sm`}>

@@ -4,6 +4,8 @@ import type { Product, CartItem } from '../data/mock';
 export type Screen =
   | 'home'
   | 'feed'
+  | 'stores'
+  | 'categories'
   | 'search'
   | 'product'
   | 'store'
@@ -24,7 +26,23 @@ export type Screen =
   | 'admin-dashboard'
   | 'inventory'
   | 'orders-mgmt'
-  | 'theme-mgmt';
+  | 'theme-mgmt'
+  | 'wallet'
+  | 'employees'
+  | 'bulk-import'
+  | 'reports'
+  | 'finance'
+  | 'users-mgmt'
+  | 'stores-mgmt'
+  | 'categories-mgmt'
+  | 'banners-mgmt'
+  | 'support'
+  | 'about'
+  | 'contact'
+  | 'privacy'
+  | 'track-orders'
+  | 'returns'
+  | 'login';
 
 interface AppState {
   screen: Screen;
@@ -38,6 +56,8 @@ interface AppState {
   toast: { message: string; type: 'success' | 'error' } | null;
   showFilterSheet: boolean;
   showSearch: boolean;
+  showMobileMenu: boolean;
+  language: 'en' | 'ar';
 }
 
 type Action =
@@ -55,13 +75,16 @@ type Action =
   | { type: 'HIDE_TOAST' }
   | { type: 'TOGGLE_FILTER_SHEET' }
   | { type: 'TOGGLE_SEARCH' }
+  | { type: 'TOGGLE_MOBILE_MENU' }
+  | { type: 'CLOSE_MOBILE_MENU' }
+  | { type: 'SET_LANGUAGE'; language: 'en' | 'ar' }
   | { type: 'CLEAR_CART' };
 
 const TAB_SCREENS: Record<string, Screen> = {
   home: 'home',
-  messages: 'messages',
-  wishlist: 'wishlist',
-  sell: 'sell',
+  stores: 'stores',
+  categories: 'categories',
+  cart: 'cart',
   profile: 'profile',
 };
 
@@ -77,12 +100,14 @@ const initialState: AppState = {
   toast: null,
   showFilterSheet: false,
   showSearch: false,
+  showMobileMenu: false,
+  language: 'en',
 };
 
 function appReducer(state: AppState, action: Action): AppState {
   switch (action.type) {
     case 'NAVIGATE': {
-      const newState = { ...state, prevScreen: state.screen, screen: action.screen };
+      const newState = { ...state, prevScreen: state.screen, screen: action.screen, showMobileMenu: false, showSearch: false };
       const tabKey = Object.entries(TAB_SCREENS).find(([, s]) => s === action.screen)?.[0];
       if (tabKey) newState.activeTab = tabKey;
       return newState;
@@ -95,18 +120,19 @@ function appReducer(state: AppState, action: Action): AppState {
         screen: target,
         activeTab: tabKey ?? state.activeTab,
         prevScreen: null,
+        showMobileMenu: false,
       };
     }
     case 'SET_TAB': {
       const screen = TAB_SCREENS[action.tab] ?? 'home';
-      return { ...state, prevScreen: state.screen, screen, activeTab: action.tab };
+      return { ...state, prevScreen: state.screen, screen, activeTab: action.tab, showMobileMenu: false, showSearch: false };
     }
     case 'SELECT_PRODUCT':
-      return { ...state, prevScreen: state.screen, screen: 'product', selectedProductId: action.id };
+      return { ...state, prevScreen: state.screen, screen: 'product', selectedProductId: action.id, showMobileMenu: false };
     case 'SELECT_STORE':
-      return { ...state, prevScreen: state.screen, screen: 'store', selectedStoreId: action.id };
+      return { ...state, prevScreen: state.screen, screen: 'store', selectedStoreId: action.id, showMobileMenu: false };
     case 'SELECT_CONVERSATION':
-      return { ...state, prevScreen: state.screen, screen: 'chat', selectedConversationId: action.id };
+      return { ...state, prevScreen: state.screen, screen: 'chat', selectedConversationId: action.id, showMobileMenu: false };
     case 'ADD_TO_CART': {
       const existing = state.cart.find((i) => i.product.id === action.product.id);
       if (existing) {
@@ -146,6 +172,12 @@ function appReducer(state: AppState, action: Action): AppState {
       return { ...state, showFilterSheet: !state.showFilterSheet };
     case 'TOGGLE_SEARCH':
       return { ...state, showSearch: !state.showSearch };
+    case 'TOGGLE_MOBILE_MENU':
+      return { ...state, showMobileMenu: !state.showMobileMenu };
+    case 'CLOSE_MOBILE_MENU':
+      return { ...state, showMobileMenu: false };
+    case 'SET_LANGUAGE':
+      return { ...state, language: action.language };
     case 'CLEAR_CART':
       return { ...state, cart: [] };
     default:
@@ -170,6 +202,9 @@ interface AppContextValue {
   hideToast: () => void;
   toggleFilterSheet: () => void;
   toggleSearch: () => void;
+  toggleMobileMenu: () => void;
+  closeMobileMenu: () => void;
+  setLanguage: (language: 'en' | 'ar') => void;
   clearCart: () => void;
 }
 
@@ -192,6 +227,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const hideToast = useCallback(() => dispatch({ type: 'HIDE_TOAST' }), []);
   const toggleFilterSheet = useCallback(() => dispatch({ type: 'TOGGLE_FILTER_SHEET' }), []);
   const toggleSearch = useCallback(() => dispatch({ type: 'TOGGLE_SEARCH' }), []);
+  const toggleMobileMenu = useCallback(() => dispatch({ type: 'TOGGLE_MOBILE_MENU' }), []);
+  const closeMobileMenu = useCallback(() => dispatch({ type: 'CLOSE_MOBILE_MENU' }), []);
+  const setLanguage = useCallback((language: 'en' | 'ar') => dispatch({ type: 'SET_LANGUAGE', language }), []);
   const clearCart = useCallback(() => dispatch({ type: 'CLEAR_CART' }), []);
 
   return (
@@ -213,6 +251,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         hideToast,
         toggleFilterSheet,
         toggleSearch,
+        toggleMobileMenu,
+        closeMobileMenu,
+        setLanguage,
         clearCart,
       }}
     >

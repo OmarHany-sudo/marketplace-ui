@@ -19,7 +19,7 @@ export default function CartPage() {
           </button>
           <h1 className="text-lg font-bold text-gray-900">Shopping Cart</h1>
         </header>
-        <div className="flex-1 flex flex-col items-center justify-center px-8">
+        <div className="flex-1 flex flex-col items-center justify-center px-8 pb-24">
           <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mb-4">
             <ShoppingBag size={32} className="text-gray-300" />
           </div>
@@ -46,9 +46,11 @@ export default function CartPage() {
         <span className="ml-auto text-sm text-gray-400">{state.cart.length} items</span>
       </header>
 
-      <div className="flex-1 overflow-y-auto no-scrollbar p-4">
+      <div className="flex-1 overflow-y-auto no-scrollbar p-4 pb-6 lg:bg-gray-50 lg:p-8">
+        <div className="lg:mx-auto lg:grid lg:max-w-6xl lg:grid-cols-[1fr_360px] lg:gap-8">
+        <div>
         {state.cart.map((item) => (
-          <div key={item.product.id} className="flex gap-3 p-3 bg-gray-50 rounded-2xl mb-3">
+          <div key={item.product.id} className="flex gap-3 p-3 bg-gray-50 rounded-2xl mb-3 lg:bg-white lg:shadow-sm lg:ring-1 lg:ring-gray-100">
             <img src={item.product.image} alt={item.product.title} className="w-20 h-20 rounded-xl object-cover bg-gray-100 shrink-0" />
             <div className="flex-1 min-w-0">
               <h3 className="text-sm font-semibold text-gray-900 line-clamp-1">{item.product.title}</h3>
@@ -63,7 +65,14 @@ export default function CartPage() {
                     <Plus size={12} />
                   </button>
                 </div>
-                <button onClick={() => removeFromCart(item.product.id)} className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center">
+                <button
+                  onClick={() => {
+                    if (window.confirm(`Remove ${item.product.title} from cart?`)) {
+                      removeFromCart(item.product.id);
+                    }
+                  }}
+                  className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center"
+                >
                   <Trash2 size={14} className="text-blue-400" />
                 </button>
               </div>
@@ -78,10 +87,10 @@ export default function CartPage() {
             <ProductCard key={p.id} product={p} />
           ))}
         </div>
-      </div>
+        </div>
 
       {/* Checkout Summary */}
-      <div className="shrink-0 p-4 bg-white border-t border-gray-100">
+      <div className="shrink-0 p-4 pb-24 bg-white border-t border-gray-100 lg:sticky lg:top-8 lg:h-fit lg:rounded-[24px] lg:border lg:border-gray-100 lg:pb-4 lg:shadow-sm">
         <div className="space-y-2 mb-3">
           <div className="flex justify-between text-sm">
             <span className="text-gray-500">Subtotal</span>
@@ -104,6 +113,8 @@ export default function CartPage() {
         >
           Proceed to Checkout
         </button>
+      </div>
+        </div>
       </div>
     </div>
   );

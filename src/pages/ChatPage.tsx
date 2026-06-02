@@ -4,15 +4,28 @@ import { useApp } from '../context/AppContext';
 import { CONVERSATIONS } from '../data/mock';
 
 export default function ChatPage() {
-  const { state, goBack } = useApp();
+  const { state, goBack, showToast } = useApp();
   const [text, setText] = useState('');
+  const [localMessages, setLocalMessages] = useState<Array<{ id: string; senderId: string; content: string; timestamp: string }>>([]);
 
   const conv = CONVERSATIONS.find((c) => c.id === state.selectedConversationId);
   if (!conv) return null;
 
   const handleSend = () => {
     if (!text.trim()) return;
+    setLocalMessages((messages) => [
+      ...messages,
+      { id: `local-${Date.now()}`, senderId: 'user', content: text.trim(), timestamp: 'Now' },
+    ]);
     setText('');
+  };
+
+  const handleImageShare = () => {
+    setLocalMessages((messages) => [
+      ...messages,
+      { id: `image-${Date.now()}`, senderId: 'user', content: 'Image shared: product reference photo', timestamp: 'Now' },
+    ]);
+    showToast('Image shared in chat');
   };
 
   return (
@@ -27,7 +40,7 @@ export default function ChatPage() {
           <h3 className="text-sm font-semibold text-gray-900">{conv.userName}</h3>
           <p className="text-xs text-emerald-500">Online</p>
         </div>
-        <button className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center active:scale-95">
+        <button onClick={() => showToast('Conversation actions opened')} className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center active:scale-95">
           <MoreHorizontal size={18} className="text-gray-700" />
         </button>
       </header>
@@ -46,7 +59,7 @@ export default function ChatPage() {
 
       {/* Messages */}
       <div className="flex-1 overflow-y-auto no-scrollbar p-4 space-y-3">
-        {conv.messages.map((msg) => {
+        {[...conv.messages, ...localMessages].map((msg) => {
           const isMe = msg.senderId === 'user';
           return (
             <div key={msg.id} className={`flex ${isMe ? 'justify-end' : 'justify-start'}`}>
@@ -61,7 +74,7 @@ export default function ChatPage() {
 
       {/* Input */}
       <div className="shrink-0 flex items-center gap-2 p-4 bg-white border-t border-gray-100">
-        <button className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center shrink-0 active:scale-95">
+        <button onClick={handleImageShare} className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center shrink-0 active:scale-95" aria-label="Share image">
           <Plus size={18} className="text-gray-500" />
         </button>
         <div className="flex-1 relative">

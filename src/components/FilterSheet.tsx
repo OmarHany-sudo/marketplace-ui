@@ -4,12 +4,14 @@ import { useState } from 'react';
 
 const CONDITIONS = ['All', 'New', 'Used', 'Like New'];
 const PRICE_RANGES = ['All', 'Under $50', '$50 - $100', '$100 - $200', 'Over $200'];
+const STORE_RATINGS = ['All', '4.0+', '4.5+', 'Top Rated'];
 const SORT_OPTIONS = ['Recommended', 'Price: Low to High', 'Price: High to Low', 'Newest First', 'Top Rated'];
 
 export default function FilterSheet() {
-  const { state, toggleFilterSheet } = useApp();
+  const { state, toggleFilterSheet, showToast } = useApp();
   const [condition, setCondition] = useState('All');
   const [priceRange, setPriceRange] = useState('All');
+  const [storeRating, setStoreRating] = useState('All');
   const [sortBy, setSortBy] = useState('Recommended');
 
   if (!state.showFilterSheet) return null;
@@ -73,11 +75,41 @@ export default function FilterSheet() {
               ))}
             </div>
           </div>
+
+          <div>
+            <h3 className="text-sm font-semibold text-gray-900 mb-3">Store Rating</h3>
+            <div className="flex flex-wrap gap-2">
+              {STORE_RATINGS.map((rating) => (
+                <button
+                  key={rating}
+                  onClick={() => setStoreRating(rating)}
+                  className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${storeRating === rating ? 'bg-[#3b82f6] text-white' : 'bg-gray-100 text-gray-600'}`}
+                >
+                  {rating}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
 
-        <div className="p-4 border-t border-gray-100 bg-white pb-8">
+        <div className="grid grid-cols-[auto_1fr] gap-3 p-4 border-t border-gray-100 bg-white pb-8">
           <button
-            onClick={toggleFilterSheet}
+            onClick={() => {
+              setCondition('All');
+              setPriceRange('All');
+              setStoreRating('All');
+              setSortBy('Recommended');
+              showToast('Filters reset');
+            }}
+            className="h-14 px-5 bg-gray-100 text-gray-700 font-semibold rounded-full active:scale-[0.98] transition-transform"
+          >
+            Reset
+          </button>
+          <button
+            onClick={() => {
+              showToast(`Filters applied: ${sortBy}`);
+              toggleFilterSheet();
+            }}
             className="w-full h-14 bg-[#3b82f6] text-white font-semibold rounded-full active:scale-[0.98] transition-transform shadow-lg shadow-[#3b82f6]/25"
           >
             Apply Filters

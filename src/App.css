@@ -3,6 +3,12 @@
   overflow: hidden;
 }
 
+.mobile-container.nav-hidden .app-top-nav {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-100%);
+}
+
 /* Hide scrollbar for all scrollable areas */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
@@ -44,6 +50,11 @@
   to { transform: translateY(0); opacity: 1; }
 }
 
+@keyframes loading-bar {
+  0% { transform: translateX(-110%); }
+  100% { transform: translateX(210%); }
+}
+
 .animate-in {
   animation-fill-mode: both;
 }
@@ -58,4 +69,8 @@
 
 .slide-in-from-top-2 {
   animation: slide-in-from-top 0.3s ease-out;
+}
+
+.animate-loading-bar {
+  animation: loading-bar 1.1s ease-in-out infinite;
 }

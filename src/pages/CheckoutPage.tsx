@@ -39,7 +39,9 @@ export default function CheckoutPage() {
         <span className="ml-auto text-sm text-gray-400">{state.cart.length} items</span>
       </header>
 
-      <div className="flex-1 overflow-y-auto no-scrollbar p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto no-scrollbar p-4 space-y-4 lg:bg-gray-50 lg:p-8">
+        <div className="lg:mx-auto lg:grid lg:max-w-5xl lg:grid-cols-[1fr_360px] lg:gap-8">
+        <div className="space-y-4">
         {/* Delivery Address */}
         <div className="p-4 bg-gray-50 rounded-2xl">
           <div className="flex items-center justify-between mb-2">
@@ -47,7 +49,7 @@ export default function CheckoutPage() {
               <MapPin size={16} className="text-[#3b82f6]" />
               <h3 className="text-sm font-semibold text-gray-900">Delivery Address</h3>
             </div>
-            <button className="text-xs text-[#3b82f6] font-semibold">Edit</button>
+            <button onClick={() => showToast('Address editor opened')} className="text-xs text-[#3b82f6] font-semibold">Edit</button>
           </div>
           <p className="text-sm text-gray-600">123 Main Street, Apt 4B</p>
           <p className="text-sm text-gray-600">New York, NY 10001</p>
@@ -121,6 +123,7 @@ export default function CheckoutPage() {
           )}
         </div>
 
+        </div>
         {/* Order Summary */}
         <div className="p-4 bg-gray-50 rounded-2xl space-y-2">
           <h3 className="text-sm font-semibold text-gray-900 mb-3">Order Summary</h3>
@@ -143,10 +146,11 @@ export default function CheckoutPage() {
             <span className="text-gray-900">${total.toFixed(2)}</span>
           </div>
         </div>
+        </div>
       </div>
 
       {/* Place Order */}
-      <div className="shrink-0 p-4 bg-white border-t border-gray-100">
+      <div className="shrink-0 p-4 bg-white border-t border-gray-100 lg:px-8">
         <button
           onClick={handlePlaceOrder}
           className="w-full h-14 bg-[#3b82f6] text-white font-semibold rounded-full active:scale-[0.98] transition-transform shadow-lg shadow-[#3b82f6]/25"

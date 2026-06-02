@@ -1,9 +1,9 @@
-import { ChevronLeft, Search, Filter, Edit2, Trash2 } from 'lucide-react';
+import { BarChart3, ChevronLeft, Search, Filter, Edit2, Trash2 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { PRODUCTS } from '../data/mock';
 
 export default function InventoryPage() {
-  const { goBack } = useApp();
+  const { goBack, navigate, toggleFilterSheet, showToast } = useApp();
 
   return (
     <div className="flex flex-col h-full bg-gray-50">
@@ -25,7 +25,7 @@ export default function InventoryPage() {
               className="w-full bg-white border border-gray-200 rounded-xl py-2.5 pl-10 pr-4 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
             />
           </div>
-          <button className="w-11 h-11 bg-white border border-gray-200 rounded-xl flex items-center justify-center text-gray-600">
+          <button onClick={toggleFilterSheet} className="w-11 h-11 bg-white border border-gray-200 rounded-xl flex items-center justify-center text-gray-600">
             <Filter size={18} />
           </button>
         </div>
@@ -52,13 +52,30 @@ export default function InventoryPage() {
                     <span className="text-[9px] text-gray-400 uppercase font-bold">Price</span>
                     <span className="text-xs font-black text-gray-900">${p.price}</span>
                   </div>
+                  <div className="w-px h-6 bg-gray-100" />
+                  <div className="flex flex-col">
+                    <span className="text-[9px] text-gray-400 uppercase font-bold">Sold</span>
+                    <span className="text-xs font-black text-gray-900">{p.reviewCount}</span>
+                  </div>
                 </div>
+                <p className="mt-2 text-[10px] font-bold text-amber-600">Minimum alert at 5 units</p>
               </div>
               <div className="flex flex-col gap-2">
-                <button className="p-2 text-gray-400 hover:text-blue-600 transition-colors">
+                <button onClick={() => showToast(`Quick report opened for ${p.title}`)} className="p-2 text-gray-400 hover:text-emerald-600 transition-colors" aria-label={`Quick report for ${p.title}`}>
+                  <BarChart3 size={16} />
+                </button>
+                <button onClick={() => navigate('sell-form')} className="p-2 text-gray-400 hover:text-blue-600 transition-colors" aria-label={`Edit ${p.title}`}>
                   <Edit2 size={16} />
                 </button>
-                <button className="p-2 text-gray-400 hover:text-rose-600 transition-colors">
+                <button
+                  onClick={() => {
+                    if (window.confirm(`Soft delete ${p.title}?`)) {
+                      showToast(`${p.title} soft deleted`);
+                    }
+                  }}
+                  className="p-2 text-gray-400 hover:text-rose-600 transition-colors"
+                  aria-label={`Delete ${p.title}`}
+                >
                   <Trash2 size={16} />
                 </button>
               </div>

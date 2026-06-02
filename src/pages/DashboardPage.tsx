@@ -2,7 +2,7 @@ import { ChevronLeft, TrendingUp, TrendingDown, Package, DollarSign, ShoppingBag
 import { useApp } from '../context/AppContext';
 
 export default function DashboardPage() {
-  const { goBack } = useApp();
+  const { goBack, navigate, showToast } = useApp();
 
   const stats = [
     { label: 'Total Revenue', value: '$12,450', change: '+12.5%', up: true, icon: DollarSign },
@@ -63,7 +63,15 @@ export default function DashboardPage() {
           <h3 className="text-sm font-semibold text-gray-900 mb-3">Quick Actions</h3>
           <div className="flex gap-3">
             {['Add Product', 'View Analytics', 'Promote Store'].map((action) => (
-              <button key={action} className="flex-1 p-3 bg-white rounded-2xl text-center active:scale-[0.98] transition-transform">
+              <button
+                key={action}
+                onClick={() => {
+                  if (action === 'Add Product') navigate('sell-form');
+                  else if (action === 'View Analytics') navigate('reports');
+                  else showToast('Promotion setup opened');
+                }}
+                className="flex-1 p-3 bg-white rounded-2xl text-center active:scale-[0.98] transition-transform"
+              >
                 <div className="w-10 h-10 rounded-xl bg-[#FFF0EF] flex items-center justify-center mx-auto mb-1.5">
                   <ArrowUpRight size={16} className="text-[#3b82f6]" />
                 </div>
@@ -77,7 +85,7 @@ export default function DashboardPage() {
         <div>
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-sm font-semibold text-gray-900">Recent Orders</h3>
-            <button className="text-xs text-[#3b82f6] font-semibold">View All</button>
+            <button onClick={() => navigate('orders-mgmt')} className="text-xs text-[#3b82f6] font-semibold">View All</button>
           </div>
           <div className="space-y-2">
             {recentOrders.map((order) => (
