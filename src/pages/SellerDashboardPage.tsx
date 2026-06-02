@@ -1,4 +1,4 @@
-import { Package, ShoppingBag, BarChart3, Settings, Plus, AlertCircle, ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import { Package, ShoppingBag, BarChart3, Settings, Plus, AlertCircle, ArrowUpRight, ArrowDownRight, Home, Store, User } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 
 const STATS = [
@@ -15,7 +15,7 @@ const RECENT_ORDERS = [
 ];
 
 export default function SellerDashboardPage() {
-  const { navigate } = useApp();
+  const { navigate, selectStore } = useApp();
 
   return (
     <div className="flex flex-col h-full bg-gray-50">
@@ -33,7 +33,7 @@ export default function SellerDashboardPage() {
         </button>
       </header>
 
-      <div className="flex-1 overflow-y-auto p-4 space-y-6 no-scrollbar">
+      <div className="flex-1 overflow-y-auto p-4 pb-24 space-y-6 no-scrollbar lg:p-8">
         {/* Stats Grid */}
         <div className="grid grid-cols-2 gap-3">
           {STATS.map((stat, i) => (
@@ -82,7 +82,7 @@ export default function SellerDashboardPage() {
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
           <div className="px-4 py-3 border-b border-gray-50 flex items-center justify-between">
             <h2 className="text-sm font-bold text-gray-900">Recent Orders</h2>
-            <button className="text-xs text-blue-600 font-semibold">View All</button>
+            <button onClick={() => navigate('orders-mgmt')} className="text-xs text-blue-600 font-semibold">View All</button>
           </div>
           <div className="divide-y divide-gray-50">
             {RECENT_ORDERS.map((order) => (
@@ -133,6 +133,22 @@ export default function SellerDashboardPage() {
           </div>
         </div>
       </div>
+
+      <nav className="shrink-0 border-t border-gray-100 bg-white px-2 pb-[max(env(safe-area-inset-bottom),0.5rem)] pt-2 lg:hidden">
+        <div className="grid grid-cols-4 gap-1">
+          {[
+            { label: 'Home', icon: Home, action: () => navigate('seller-dashboard') },
+            { label: 'Store Preview', icon: Store, action: () => selectStore('s1') },
+            { label: 'Add Product', icon: Plus, action: () => navigate('sell-form') },
+            { label: 'My Account', icon: User, action: () => navigate('profile') },
+          ].map((item) => (
+            <button key={item.label} onClick={item.action} className="flex h-14 flex-col items-center justify-center gap-1 rounded-2xl text-[10px] font-black text-gray-500 active:bg-gray-100">
+              <item.icon size={18} className="text-blue-600" />
+              {item.label}
+            </button>
+          ))}
+        </div>
+      </nav>
     </div>
   );
 }

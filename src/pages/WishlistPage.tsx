@@ -13,7 +13,7 @@ export default function WishlistPage() {
         <header className="shrink-0 px-4 py-4 border-b border-gray-100">
           <h1 className="text-xl font-bold text-gray-900">Wishlist</h1>
         </header>
-        <div className="flex-1 flex flex-col items-center justify-center px-8">
+        <div className="flex-1 flex flex-col items-center justify-center px-8 pb-24">
           <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mb-4">
             <Heart size={32} className="text-gray-300" />
           </div>
@@ -37,8 +37,8 @@ export default function WishlistPage() {
         <h1 className="text-xl font-bold text-gray-900">Wishlist</h1>
         <span className="text-sm text-gray-400">{wishedProducts.length} items</span>
       </header>
-      <div className="flex-1 overflow-y-auto no-scrollbar p-4">
-        <div className="grid grid-cols-2 gap-3">
+      <div className="flex-1 overflow-y-auto no-scrollbar p-4 pb-28 lg:bg-gray-50 lg:p-8">
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:mx-auto lg:max-w-7xl lg:grid-cols-4 lg:gap-5 xl:grid-cols-5">
           {wishedProducts.map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}

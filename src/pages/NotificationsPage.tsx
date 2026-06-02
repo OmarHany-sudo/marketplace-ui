@@ -11,7 +11,7 @@ const NOTIFICATIONS = [
 ];
 
 export default function NotificationsPage() {
-  const { goBack } = useApp();
+  const { goBack, navigate, showToast } = useApp();
 
   return (
     <div className="flex flex-col h-full bg-white">
@@ -22,13 +22,19 @@ export default function NotificationsPage() {
           </button>
           <h1 className="text-lg font-bold text-gray-900">Notifications</h1>
         </div>
-        <button className="text-xs text-[#3b82f6] font-semibold">Settings</button>
+        <button onClick={() => showToast('Notification settings opened')} className="text-xs text-[#3b82f6] font-semibold">Settings</button>
       </header>
 
       <div className="flex-1 overflow-y-auto no-scrollbar">
         {NOTIFICATIONS.map((n) => (
           <button
             key={n.id}
+            onClick={() => {
+              if (n.title.includes('Message')) navigate('messages');
+              else if (n.title.includes('Review')) navigate('reviews');
+              else if (n.title.includes('Order')) navigate('track-orders');
+              else showToast(n.title);
+            }}
             className="w-full flex items-start gap-3 px-4 py-3.5 text-left active:bg-gray-50 transition-colors border-b border-gray-50"
           >
             <div className={`w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 ${n.color}`}>

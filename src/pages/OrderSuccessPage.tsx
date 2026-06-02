@@ -29,6 +29,13 @@ export default function OrderSuccessPage() {
         <Home size={18} />
         Back to Home
       </button>
+      <button
+        onClick={() => navigate('track-orders')}
+        className="mt-3 flex h-14 w-full items-center justify-center gap-2 rounded-full bg-gray-100 font-semibold text-gray-800 transition-transform active:scale-[0.98]"
+      >
+        <Package size={18} />
+        Track Order
+      </button>
     </div>
   );
 }

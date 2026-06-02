@@ -2,11 +2,22 @@ import { useState } from 'react';
 import { ChevronLeft, Package, Clock, CheckCircle2, Truck, ChevronRight } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 
-const STATUSES = ['All', 'Pending', 'Confirmed', 'Shipping', 'Delivered'];
+const STATUSES = ['All', 'Pending', 'Confirmed', 'Preparing', 'Out for Delivery', 'Delivered', 'Cancelled', 'Return Requested', 'Returned'];
 
 export default function OrdersMgmtPage() {
-  const { goBack } = useApp();
+  const { goBack, navigate, showToast } = useApp();
   const [activeStatus, setActiveStatus] = useState('All');
+  const orders = [
+    { id: 'ORD-9921', customer: 'Sarah Ahmed', items: 2, total: '$145.00', status: 'Pending', time: '10 mins ago' },
+    { id: 'ORD-9920', customer: 'John Smith', items: 1, total: '$89.00', status: 'Confirmed', time: '1 hour ago' },
+    { id: 'ORD-9919', customer: 'Mike Ross', items: 3, total: '$210.50', status: 'Preparing', time: '3 hours ago' },
+    { id: 'ORD-9917', customer: 'Nora Lee', items: 2, total: '$130.00', status: 'Out for Delivery', time: 'Today' },
+    { id: 'ORD-9918', customer: 'Emma Watson', items: 1, total: '$45.00', status: 'Delivered', time: 'Yesterday' },
+    { id: 'ORD-9916', customer: 'Ali Omar', items: 1, total: '$75.00', status: 'Return Requested', time: '2 days ago' },
+    { id: 'ORD-9915', customer: 'Mia Chen', items: 1, total: '$55.00', status: 'Returned', time: '4 days ago' },
+    { id: 'ORD-9914', customer: 'Sam Ford', items: 1, total: '$25.00', status: 'Cancelled', time: '1 week ago' },
+  ];
+  const visibleOrders = activeStatus === 'All' ? orders : orders.filter((order) => order.status === activeStatus);
 
   return (
     <div className="flex flex-col h-full bg-gray-50">
@@ -32,23 +43,20 @@ export default function OrdersMgmtPage() {
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4 no-scrollbar">
-        {[
-          { id: 'ORD-9921', customer: 'Sarah Ahmed', items: 2, total: '$145.00', status: 'Pending', time: '10 mins ago' },
-          { id: 'ORD-9920', customer: 'John Smith', items: 1, total: '$89.00', status: 'Confirmed', time: '1 hour ago' },
-          { id: 'ORD-9919', customer: 'Mike Ross', items: 3, total: '$210.50', status: 'Shipping', time: '3 hours ago' },
-          { id: 'ORD-9918', customer: 'Emma Watson', items: 1, total: '$45.00', status: 'Delivered', time: 'Yesterday' },
-        ].map((order) => (
+        {visibleOrders.map((order) => (
           <div key={order.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
             <div className="p-4 flex items-center justify-between border-b border-gray-50">
               <div className="flex items-center gap-3">
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
                   order.status === 'Pending' ? 'bg-amber-50 text-amber-600' :
                   order.status === 'Confirmed' ? 'bg-blue-50 text-blue-600' :
-                  order.status === 'Shipping' ? 'bg-purple-50 text-purple-600' : 'bg-emerald-50 text-emerald-600'
+                  order.status === 'Preparing' ? 'bg-purple-50 text-purple-600' :
+                  order.status === 'Out for Delivery' ? 'bg-indigo-50 text-indigo-600' :
+                  order.status === 'Delivered' ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-600'
                 }`}>
                   {order.status === 'Pending' ? <Clock size={20} /> :
                    order.status === 'Confirmed' ? <CheckCircle2 size={20} /> :
-                   order.status === 'Shipping' ? <Truck size={20} /> : <Package size={20} />}
+                   order.status === 'Preparing' || order.status === 'Out for Delivery' ? <Truck size={20} /> : <Package size={20} />}
                 </div>
                 <div>
                   <h3 className="text-xs font-black text-gray-900">{order.id}</h3>
@@ -67,8 +75,22 @@ export default function OrdersMgmtPage() {
                 </div>
                 <span className="text-xs font-bold text-gray-700">{order.customer}</span>
               </div>
-              <button className="flex items-center gap-1 text-[10px] font-black text-blue-600 uppercase tracking-wider">
+              <button onClick={() => navigate('track-orders')} className="flex items-center gap-1 text-[10px] font-black text-blue-600 uppercase tracking-wider">
                 Details <ChevronRight size={12} />
+              </button>
+            </div>
+            <div className="grid grid-cols-2 gap-2 border-t border-gray-50 p-3 sm:grid-cols-4">
+              <button onClick={() => showToast(`Shipping info opened for ${order.id}`)} className="rounded-xl bg-blue-50 px-2 py-2 text-[10px] font-black uppercase tracking-wider text-blue-600">
+                Shipping
+              </button>
+              <button onClick={() => navigate('returns')} className="rounded-xl bg-amber-50 px-2 py-2 text-[10px] font-black uppercase tracking-wider text-amber-600">
+                Return
+              </button>
+              <button onClick={() => showToast(`Exchange request opened for ${order.id}`)} className="rounded-xl bg-emerald-50 px-2 py-2 text-[10px] font-black uppercase tracking-wider text-emerald-600">
+                Exchange
+              </button>
+              <button onClick={() => showToast(`Complaint opened for ${order.id}`)} className="rounded-xl bg-rose-50 px-2 py-2 text-[10px] font-black uppercase tracking-wider text-rose-600">
+                Complaint
               </button>
             </div>
           </div>

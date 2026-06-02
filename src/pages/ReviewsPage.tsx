@@ -4,11 +4,12 @@ import { useApp } from '../context/AppContext';
 import { REVIEWS } from '../data/mock';
 
 export default function ReviewsPage() {
-  const { goBack } = useApp();
+  const { goBack, showToast } = useApp();
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState('');
 
   const handleSubmit = () => {
+    showToast('Review submitted');
     setRating(0);
     setReview('');
   };

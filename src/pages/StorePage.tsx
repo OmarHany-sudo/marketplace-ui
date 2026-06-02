@@ -5,7 +5,7 @@ import { STORES, PRODUCTS } from '../data/mock';
 import ProductCard from '../components/ProductCard';
 
 export default function StorePage() {
-  const { state, goBack, selectConversation } = useApp();
+  const { state, goBack, selectConversation, showToast } = useApp();
   const [following, setFollowing] = useState(false);
   const [showCheck, setShowCheck] = useState(false);
   const [scrollY, setScrollY] = useState(0);
@@ -37,7 +37,7 @@ export default function StorePage() {
   return (
     <div className="flex flex-col h-full bg-white relative overflow-hidden">
       {/* Header Bar (Fixed) */}
-      <header className="absolute top-0 left-0 right-0 h-16 px-4 flex items-center justify-between z-50 bg-white/80 backdrop-blur-md border-b border-gray-100/50">
+      <header className="app-top-nav absolute top-0 left-0 right-0 h-16 px-4 flex items-center justify-between z-50 bg-white/80 backdrop-blur-md border-b border-gray-100/50 transition-all duration-300 ease-out lg:hidden">
         <button 
           onClick={goBack} 
           className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-900 active:scale-90 transition-transform"
@@ -49,7 +49,7 @@ export default function StorePage() {
             {store.name}
           </h2>
         </div>
-        <button className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-900 active:scale-90 transition-transform">
+        <button onClick={() => showToast('Store actions opened')} className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-900 active:scale-90 transition-transform">
           <MoreHorizontal size={20} strokeWidth={2.5} />
         </button>
       </header>
@@ -57,10 +57,10 @@ export default function StorePage() {
       {/* Main Scrollable Content */}
       <div 
         onScroll={handleScroll}
-        className="flex-1 overflow-y-auto no-scrollbar pt-16"
+        className="flex-1 overflow-y-auto no-scrollbar pt-16 lg:bg-gray-50 lg:pt-0"
       >
         {/* Store Hero (Fixed-like behavior) */}
-        <div className="relative h-[240px] w-full overflow-hidden bg-gray-900">
+        <div className="relative h-[240px] w-full overflow-hidden bg-gray-900 lg:h-[320px]">
           <div 
             className="absolute inset-0 w-full h-full"
             style={{ 
@@ -74,9 +74,9 @@ export default function StorePage() {
         </div>
 
         {/* Content Area (Starts below hero) */}
-        <div className="relative bg-white z-10 min-h-full">
+        <div className="relative bg-white z-10 min-h-full lg:bg-gray-50">
           {/* Store Branding & Details (Below Cover) */}
-          <div className="px-6 pt-6 pb-4 flex flex-col gap-4">
+          <div className="px-6 pt-6 pb-4 flex flex-col gap-4 lg:mx-auto lg:max-w-7xl lg:-mt-16 lg:rounded-[32px] lg:bg-white lg:p-8 lg:shadow-sm lg:ring-1 lg:ring-gray-100">
             <div className="flex items-center gap-4">
               <div className="w-20 h-20 rounded-[24px] border-2 border-gray-100 overflow-hidden bg-white shadow-lg shrink-0">
                 <img src={store.avatar} alt={store.name} className="w-full h-full object-cover" />
@@ -138,7 +138,7 @@ export default function StorePage() {
           </div>
 
           {/* Products Grid */}
-          <div className="px-4 pb-20 mt-4">
+          <div className="px-4 pb-28 mt-4 lg:mx-auto lg:max-w-7xl lg:px-8 lg:pb-12">
             <div className="flex items-center justify-between mb-6 px-2">
               <div className="flex flex-col">
                 <h2 className="text-xl font-black text-gray-900 tracking-tight">Store Listings</h2>
@@ -146,7 +146,7 @@ export default function StorePage() {
               </div>
               <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{storeProducts.length} Items</span>
             </div>
-            <div className="grid grid-cols-2 gap-5">
+            <div className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
               {storeProducts.map((p) => (
                 <ProductCard key={p.id} product={p} />
               ))}

@@ -3,18 +3,18 @@ import { useApp } from '../context/AppContext';
 import { STORES } from '../data/mock';
 
 export default function ProfilePage() {
-  const { navigate, selectStore } = useApp();
+  const { navigate, selectStore, showToast } = useApp();
   const myStore = STORES[0];
 
   const menuItems = [
-    { icon: Package, label: 'My Orders', badge: '3 active', screen: 'home' as const },
+    { icon: Package, label: 'My Orders', badge: '3 active', screen: 'track-orders' as const },
     { icon: Heart, label: 'Wishlist', badge: null, screen: 'wishlist' as const },
     { icon: MessageSquare, label: 'Messages', badge: '2 new', screen: 'messages' as const },
     { icon: Star, label: 'My Reviews', badge: null, screen: 'reviews' as const },
-    { icon: Shield, label: 'Security', badge: null, screen: 'home' as const },
-    { icon: MapPin, label: 'Addresses', badge: null, screen: 'home' as const },
-    { icon: HelpCircle, label: 'Help Center', badge: null, screen: 'home' as const },
-    { icon: Settings, label: 'Settings', badge: null, screen: 'home' as const },
+    { icon: Shield, label: 'Security', badge: null, screen: 'privacy' as const },
+    { icon: MapPin, label: 'Addresses', badge: null, screen: 'contact' as const },
+    { icon: HelpCircle, label: 'Help Center', badge: null, screen: 'support' as const },
+    { icon: Settings, label: 'Settings', badge: null, screen: 'employees' as const },
     { icon: LayoutDashboard, label: 'Merchant Dashboard', badge: 'Pro', screen: 'seller-dashboard' as const },
     { icon: ShieldCheck, label: 'Admin Dashboard', badge: 'Staff', screen: 'admin-dashboard' as const },
   ];
@@ -22,7 +22,7 @@ export default function ProfilePage() {
   return (
     <div className="flex flex-col h-full bg-white">
       {/* Profile Header */}
-      <div className="shrink-0 px-4 pt-4 pb-5">
+      <div className="shrink-0 px-4 pt-4 pb-5 lg:mx-auto lg:w-full lg:max-w-5xl lg:px-8">
         <div className="flex items-center gap-4">
           <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-100">
             <img src="/avatar1.jpg" alt="Profile" className="w-full h-full object-cover" />
@@ -59,10 +59,10 @@ export default function ProfilePage() {
       </div>
 
       {/* Menu */}
-      <div className="flex-1 overflow-y-auto no-scrollbar">
-        <div className="px-4 pb-2">
+      <div className="flex-1 overflow-y-auto no-scrollbar lg:bg-gray-50">
+        <div className="px-4 pb-2 lg:mx-auto lg:max-w-5xl lg:px-8 lg:pt-6">
           <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Account</h3>
-          <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+          <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden lg:grid lg:grid-cols-2">
             {menuItems.map((item, idx) => (
               <button
                 key={item.label}
@@ -83,7 +83,7 @@ export default function ProfilePage() {
         </div>
 
         {/* Dashboard Quick Link */}
-        <div className="px-4 py-4">
+        <div className="px-4 py-4 lg:mx-auto lg:max-w-5xl lg:px-8">
           <button
             onClick={() => navigate('dashboard')}
             className="w-full p-4 bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl text-left active:scale-[0.99] transition-transform"
@@ -95,8 +95,8 @@ export default function ProfilePage() {
         </div>
 
         {/* Logout */}
-        <div className="px-4 pb-8">
-          <button className="w-full flex items-center justify-center gap-2 py-3 text-blue-500 text-sm font-semibold active:bg-blue-50 rounded-2xl">
+        <div className="px-4 pb-28 lg:mx-auto lg:max-w-5xl lg:px-8 lg:pb-12">
+          <button onClick={() => showToast('Signed out')} className="w-full flex items-center justify-center gap-2 py-3 text-blue-500 text-sm font-semibold active:bg-blue-50 rounded-2xl">
             <LogOut size={16} />
             Sign Out
           </button>
